@@ -59,7 +59,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Erh-Yq-M31" userLabel="Meter View">
                                                 <rect key="frame" x="0.0" y="0.0" width="358" height="330"/>
                                                 <subviews>
-                                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="p0z-8U-gJl">
+                                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="p0z-8U-gJl">
                                                         <rect key="frame" x="104" y="164" width="150" height="3"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="tintColor" red="0.30868663931270002" green="0.60561926047553216" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -139,6 +139,7 @@
                     <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="PDs-ix-kwW"/>
                     <connections>
                         <outlet property="currentLabel" destination="C4Y-03-0y1" id="eB6-jx-Wco"/>
+                        <outlet property="glassStepper" destination="MwN-KQ-Dh3" id="LiC-Dq-8KM"/>
                         <outlet property="goalLabel" destination="mdG-mm-y7m" id="N3g-It-e1G"/>
                         <outlet property="percentLabel" destination="vsP-uQ-JiO" id="XXs-PH-7WQ"/>
                         <outlet property="waterBar" destination="p0z-8U-gJl" id="sOL-fO-roe"/>
@@ -151,7 +152,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="0kh-V0-QYU">
             <objects>
-                <tabBarController id="hHh-KA-k8k" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarController" id="hHh-KA-k8k" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WR6-bl-2p0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

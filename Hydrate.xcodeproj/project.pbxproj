@@ -58,6 +58,13 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		A2267CDB24777C31001D9D82 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		A2DE9B01247630C700D73EF6 = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +87,7 @@
 			children = (
 				A2DE9B0D247630C700D73EF6 /* AppDelegate.swift */,
 				A2DE9B0F247630C700D73EF6 /* SceneDelegate.swift */,
+				A2267CDB24777C31001D9D82 /* Models */,
 				A21E40AA247639320004BBDE /* View */,
 				A21E40AB247639430004BBDE /* Controller */,
 				A2DE9B16247630C800D73EF6 /* Assets.xcassets */,

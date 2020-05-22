@@ -14,8 +14,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
     @IBOutlet weak var waterBar: UIProgressView!
+    @IBOutlet weak var glassStepper: UIStepper!
     
-    var current: Float = 0.0
+    var current: Float = 80.0
     var goal: Float = 8.0
     var percent: Float = 0.0
     
@@ -26,11 +27,16 @@ class HomeViewController: UIViewController {
         waterBar.transform = waterBar.transform.rotated(by: 270 * .pi / 180)
         waterBar.transform = waterBar.transform.scaledBy(x: 1.8, y: 100)
 
-        // iniatialize progressbar
+        // iniatialize progressbar and stepper values
         percent = current / goal
         waterBar.setProgress(percent, animated: true)
-        percentLabel.text = String(format: "%.0f", percent * 100) + "%"
-
+        glassStepper.value = Double(percent)
+        
+        if percent * 100 < 1000 {
+            percentLabel.text = String(format: "%.0f", percent * 100) + "%"
+        } else {
+            percentLabel.text = "999%"
+        }
         
         // set goal and number of glasses consumed today here
         goalLabel.text = String(format: "Current Daily Goal: %.0f glasses", goal)
@@ -42,16 +48,20 @@ class HomeViewController: UIViewController {
         
         // for now, do not let user drink more than goal amount (percentage purposes)
         
-        if current < goal {
-            // change current value based on stepper
-            current = Float(sender.value)
+        // change current value based on stepper
+        current = Float(sender.value)
             
-            currentLabel.text = String(format: "%.0f/%.0f", current, goal)
+        currentLabel.text = String(format: "%.0f/%.0f", current, goal)
             
-            // progress bar and percent progression
-            percent = current / goal
-            waterBar.setProgress(percent, animated: true)
+        // progress bar and percent progression
+        percent = current / goal
+        waterBar.setProgress(percent, animated: true)
+        
+        // limit percent to 999%
+        if percent * 100 < 1000 {
             percentLabel.text = String(format: "%.0f", percent * 100) + "%"
+        } else {
+            percentLabel.text = "999%"
         }
         
     }
