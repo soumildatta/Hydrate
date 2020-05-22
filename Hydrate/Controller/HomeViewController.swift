@@ -44,10 +44,6 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func glassesStepper(_ sender: UIStepper) {
-        // testing stepper
-        
-        // for now, do not let user drink more than goal amount (percentage purposes)
-        
         // change current value based on stepper
         current = Float(sender.value)
             
