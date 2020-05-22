@@ -52,7 +52,6 @@ class HomeViewController: UIViewController {
             percent = current / goal
             waterBar.setProgress(percent, animated: true)
             percentLabel.text = String(format: "%.0f", percent * 100) + "%"
-            
         }
         
     }
