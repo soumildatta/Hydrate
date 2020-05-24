@@ -16,21 +16,22 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var waterBar: UIProgressView!
     @IBOutlet weak var glassStepper: UIStepper!
     
+    let glassManager = GlassManager()
+    
     var current: Float = 80.0
-    var goal: Float = 8.0
     var percent: Float = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         // making progress bar vertical and increasing width
         waterBar.transform = waterBar.transform.rotated(by: 270 * .pi / 180)
         waterBar.transform = waterBar.transform.scaledBy(x: 1.8, y: 100)
 
         // iniatialize progressbar and stepper values
-        percent = current / goal
+        percent = current / glassManager.currentGoal
         waterBar.setProgress(percent, animated: true)
-        glassStepper.value = Double(percent)
+        glassStepper.value = Double(current)
         
         if percent * 100 < 1000 {
             percentLabel.text = String(format: "%.0f", percent * 100) + "%"
@@ -39,18 +40,18 @@ class HomeViewController: UIViewController {
         }
         
         // set goal and number of glasses consumed today here
-        goalLabel.text = String(format: "Current Daily Goal: %.0f glasses", goal)
-        currentLabel.text = String(format: "%.0f/%.0f", current, goal)
+        goalLabel.text = String(format: "Current Daily Goal: %.0f glasses", glassManager.currentGoal)
+        currentLabel.text = String(format: "%.0f/%.0f", current, glassManager.currentGoal)
     }
     
     @IBAction func glassesStepper(_ sender: UIStepper) {
         // change current value based on stepper
         current = Float(sender.value)
             
-        currentLabel.text = String(format: "%.0f/%.0f", current, goal)
+        currentLabel.text = String(format: "%.0f/%.0f", current, glassManager.currentGoal)
             
         // progress bar and percent progression
-        percent = current / goal
+        percent = current / glassManager.currentGoal
         waterBar.setProgress(percent, animated: true)
         
         // limit percent to 999%

@@ -8,12 +8,40 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
+    @IBOutlet weak var glassSizePicker: UIPickerView!
+    @IBOutlet weak var setGoalLabel: UILabel!
+    @IBOutlet weak var setGoalStepper: UIStepper!
+    
+    var glassManager = GlassManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        glassSizePicker.dataSource = self
+        glassSizePicker.delegate = self
+
+        // initialize stepper value
+        setGoalStepper.value = Double(glassManager.currentGoal)
+        
     }
     
+    @IBAction func setGoal(_ sender: UIStepper) {
+        setGoalLabel.text = "\(Int(sender.value)) glasses"
+        glassManager.currentGoal = Float(sender.value)
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        // the number of columns
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return glassManager.glassSizes.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return glassManager.glassSizes[row] + "oz"
+    }
 }
