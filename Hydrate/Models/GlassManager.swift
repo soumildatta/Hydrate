@@ -9,6 +9,9 @@
 import Foundation
 
 struct GlassManager {
+    // use singleton
+    static var sharedInstance = GlassManager()
+    
     var currentGoal: Float = 8
     let glassSizes: [String] = ["4", "6", "8", "9", "10", "12", "14", "16"]
 }

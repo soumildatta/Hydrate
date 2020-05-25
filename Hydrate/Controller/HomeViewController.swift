@@ -21,16 +21,13 @@ class HomeViewController: UIViewController {
     var current: Float = 80.0
     var percent: Float = 0.0
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-                
-        // making progress bar vertical and increasing width
-        waterBar.transform = waterBar.transform.rotated(by: 270 * .pi / 180)
-        waterBar.transform = waterBar.transform.scaledBy(x: 1.8, y: 100)
-
-        // iniatialize progressbar and stepper values
-        percent = current / glassManager.currentGoal
-        waterBar.setProgress(percent, animated: true)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        
+        // reload view every time it is clicked on
+        // iniatialize progressbar and stepper values with new (possibly changed) currentGoal value
+        percent = current / GlassManager.sharedInstance.currentGoal
+        waterBar.setProgress(percent, animated: false)
         glassStepper.value = Double(current)
         
         if percent * 100 < 1000 {
@@ -40,18 +37,29 @@ class HomeViewController: UIViewController {
         }
         
         // set goal and number of glasses consumed today here
-        goalLabel.text = String(format: "Current Daily Goal: %.0f glasses", glassManager.currentGoal)
-        currentLabel.text = String(format: "%.0f/%.0f", current, glassManager.currentGoal)
+        goalLabel.text = String(format: "Current Daily Goal: %.0f glasses", GlassManager.sharedInstance.currentGoal)
+        currentLabel.text = String(format: "%.0f/%.0f", current, GlassManager.sharedInstance.currentGoal)
+
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+                
+        // making progress bar vertical and increasing width
+        waterBar.transform = waterBar.transform.rotated(by: 270 * .pi / 180)
+        waterBar.transform = waterBar.transform.scaledBy(x: 1.8, y: 100)
+
     }
     
     @IBAction func glassesStepper(_ sender: UIStepper) {
         // change current value based on stepper
         current = Float(sender.value)
+        print(GlassManager.sharedInstance.currentGoal)
             
-        currentLabel.text = String(format: "%.0f/%.0f", current, glassManager.currentGoal)
+        currentLabel.text = String(format: "%.0f/%.0f", current, GlassManager.sharedInstance.currentGoal)
             
         // progress bar and percent progression
-        percent = current / glassManager.currentGoal
+        percent = current / GlassManager.sharedInstance.currentGoal
         waterBar.setProgress(percent, animated: true)
         
         // limit percent to 999%

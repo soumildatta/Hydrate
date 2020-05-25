@@ -13,8 +13,8 @@ class ProfileViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var glassSizePicker: UIPickerView!
     @IBOutlet weak var setGoalLabel: UILabel!
     @IBOutlet weak var setGoalStepper: UIStepper!
-    
-    var glassManager = GlassManager()
+        
+    let glassManager = GlassManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +28,8 @@ class ProfileViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     @IBAction func setGoal(_ sender: UIStepper) {
-        setGoalLabel.text = "\(Int(sender.value)) glasses"
-        glassManager.currentGoal = Float(sender.value)
+        setGoalLabel.text = "\(Int(sender.value)) glasses /day"
+        GlassManager.sharedInstance.currentGoal = Float(sender.value)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
