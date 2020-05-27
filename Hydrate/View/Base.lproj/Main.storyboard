@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hHh-KA-k8k">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qsk-iC-IBA">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -307,10 +307,98 @@
             </objects>
             <point key="canvasLocation" x="-533" y="-808"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xv8-bV-WSS">
+            <objects>
+                <navigationController id="qsk-iC-IBA" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nha-gp-5dn">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2IG-8d-Pws" kind="relationship" relationship="rootViewController" id="if3-DG-8yE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q2M-22-MPe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3970" y="-123"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="0Uf-RL-Aen">
+            <objects>
+                <viewController id="2IG-8d-Pws" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6tC-I9-JBV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdK-SM-V9e">
+                                <rect key="frame" x="168" y="361" width="38" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <segue destination="y1e-kL-uMn" kind="show" id="imG-Ef-plj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0l-af-5eZ">
+                                <rect key="frame" x="159" y="427" width="56" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Sign up "/>
+                                <connections>
+                                    <segue destination="n7g-68-7iY" kind="show" id="lw3-rV-maQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="3S4-as-LUa"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="DG5-bh-4dw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DdX-Wz-mmU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3142" y="-123"/>
+        </scene>
+        <!--Login-->
+        <scene sceneID="BQN-FI-GBy">
+            <objects>
+                <viewController id="y1e-kL-uMn" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VqE-GY-b7e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="HHC-a9-yIF"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Login" id="fQx-fW-Tgz"/>
+                    <connections>
+                        <segue destination="hHh-KA-k8k" kind="presentation" id="afW-k6-5Uv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qtm-cd-p0u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2346.4000000000001" y="-475.1231527093596"/>
+        </scene>
+        <!--Sign up-->
+        <scene sceneID="MFl-hO-3uz">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="n7g-68-7iY" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jbq-CE-W9s">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Ihc-e6-6Gm"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Sign up" id="4na-AH-Wiv"/>
+                    <connections>
+                        <segue destination="hHh-KA-k8k" kind="presentation" id="r5a-hq-iIw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BOI-kr-EGg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2346" y="209"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="0kh-V0-QYU">
             <objects>
-                <tabBarController storyboardIdentifier="tabBarController" id="hHh-KA-k8k" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarController" modalPresentationStyle="fullScreen" id="hHh-KA-k8k" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WR6-bl-2p0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -328,6 +416,9 @@
             <point key="canvasLocation" x="-1451" y="-132"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="r5a-hq-iIw"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="chart.bar.fill" catalog="system" width="128" height="89"/>
         <image name="gear" catalog="system" width="128" height="119"/>
