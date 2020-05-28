@@ -2,6 +2,10 @@
 # Created by https://www.gitignore.io/api/xcode,swift
 # Edit at https://www.gitignore.io/?templates=xcode,swift
 
+### Firebase ###
+GoogleService-Info.plist
+
+
 ### Swift ###
 # Xcode
 #
