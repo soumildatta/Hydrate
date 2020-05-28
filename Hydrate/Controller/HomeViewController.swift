@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
     
     let glassManager = GlassManager()
     
-    var current: Float = 80.0
+    var current: Float = 0.0
     var percent: Float = 0.0
     
     override func viewDidAppear(_ animated: Bool) {
