@@ -470,7 +470,7 @@
             </objects>
             <point key="canvasLocation" x="-3123" y="-133"/>
         </scene>
-        <!--Sign up-->
+        <!--Signup View Controller-->
         <scene sceneID="MFl-hO-3uz">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="n7g-68-7iY" customClass="SignupViewController" customModule="Hydrate" customModuleProvider="target" sceneMemberID="viewController">
@@ -611,7 +611,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Ihc-e6-6Gm"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Sign up" id="4na-AH-Wiv"/>
                     <connections>
                         <outlet property="ConfirmPasswordField" destination="cDf-Vm-O10" id="3ey-Ec-bQG"/>
                         <outlet property="EmailTextField" destination="sA7-Mc-dkg" id="Gtq-IW-yNg"/>
@@ -653,23 +652,78 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIT-mz-y2F">
-                                <rect key="frame" x="16" y="20" width="29" height="30"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginBackground" translatesAutoresizingMaskIntoConstraints="NO" id="RqZ-tt-PY3">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Retrieve Password" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTy-5P-vGM">
+                                <rect key="frame" x="66" y="82" width="282" height="119"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HiraginoSans-W7" family="Hiragino Sans" pointSize="45"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIT-mz-y2F">
+                                <rect key="frame" x="15" y="20" width="25" height="25"/>
                                 <state key="normal" image="return"/>
                                 <connections>
                                     <action selector="returnToLogin:" destination="7eo-Jy-wz7" eventType="touchUpInside" id="xoF-jc-As7"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7a-tu-dI2">
+                                <rect key="frame" x="23" y="209" width="369" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">Enter the email you used while signing up in the area below. An email to reset your password will be sent to your email if an account exists.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X7k-yG-NqL">
+                                <rect key="frame" x="23" y="388" width="369" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" alignment="center" spacing="82" translatesAutoresizingMaskIntoConstraints="NO" id="XId-R2-e43" userLabel="Submit button">
+                                <rect key="frame" x="60" y="470" width="294" height="90"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Submit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3m-dG-Lxs">
+                                        <rect key="frame" x="0.0" y="26" width="122" height="38"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="38" id="2ft-PS-Pf2"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="32"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hY6-4c-u5d">
+                                        <rect key="frame" x="204" y="0.0" width="90" height="90"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="90" id="8ns-q3-IHC"/>
+                                            <constraint firstAttribute="width" constant="90" id="VGq-Yi-er4"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="forward"/>
+                                        <connections>
+                                            <action selector="LoginPressed:" destination="2IG-8d-Pws" eventType="touchUpInside" id="cop-T8-6q8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="RqZ-tt-PY3" firstAttribute="top" secondItem="gu6-hp-1Tv" secondAttribute="top" id="6Wo-g7-Z2E"/>
+                            <constraint firstItem="eIT-mz-y2F" firstAttribute="top" secondItem="ztr-N1-5Hu" secondAttribute="top" constant="20" id="Q5a-41-IOY"/>
+                            <constraint firstItem="RqZ-tt-PY3" firstAttribute="trailing" secondItem="ztr-N1-5Hu" secondAttribute="trailing" id="Qo4-Pa-mu3"/>
+                            <constraint firstItem="eIT-mz-y2F" firstAttribute="leading" secondItem="ztr-N1-5Hu" secondAttribute="leading" constant="15" id="RE9-aI-Kja"/>
+                            <constraint firstItem="RqZ-tt-PY3" firstAttribute="leading" secondItem="ztr-N1-5Hu" secondAttribute="leading" id="Vir-4l-zbc"/>
+                            <constraint firstAttribute="bottom" secondItem="RqZ-tt-PY3" secondAttribute="bottom" id="t6f-IL-62n"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ztr-N1-5Hu"/>
                     </view>
-                    <navigationItem key="navigationItem" id="oEt-GA-3jU"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kdw-Lk-hB2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2297" y="609"/>
+            <point key="canvasLocation" x="-2297.1014492753625" y="608.70535714285711"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

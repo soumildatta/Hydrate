@@ -25,12 +25,10 @@ class LoginViewController: UIViewController {
         // TODO function to check email syntax
         if let email = EmailTextField.text, let password = PasswordTextField.text{
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-                // we dont need the guard and the weak self because it is outdated
                 if let e = error {
                     self.WarningLabel.text = e.localizedDescription
                 } else {
-                    // print("Logged In")
-                    self.performSegue(withIdentifier: "LoginSegue", sender: self)
+                     self.performSegue(withIdentifier: "LoginSegue", sender: self)
                 }
             }
         }
