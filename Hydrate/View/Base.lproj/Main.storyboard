@@ -180,7 +180,7 @@
         <!--Home-->
         <scene sceneID="WF3-6H-cLe">
             <objects>
-                <viewController id="pFe-ix-nw8" customClass="HomeViewController" customModule="Hydrate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="pFe-ix-nw8" customClass="HomeViewController" customModule="Hydrate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="34Y-pO-NNh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -352,7 +352,7 @@
                                                     <constraint firstAttribute="height" constant="34" id="lgV-q2-tT3"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" textContentType="username"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k09-9L-cju">
                                                 <rect key="frame" x="0.0" y="59" width="334" height="34"/>
@@ -362,7 +362,7 @@
                                                     <constraint firstAttribute="height" constant="34" id="wfK-ly-tMg"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Errors and warning label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXd-dv-Itn">
                                                 <rect key="frame" x="0.0" y="118" width="334" height="20"/>
@@ -463,11 +463,12 @@
                         <outlet property="EmailTextField" destination="jOz-g0-tm2" id="uV3-sB-VUO"/>
                         <outlet property="PasswordTextField" destination="k09-9L-cju" id="UpZ-Eu-7wQ"/>
                         <outlet property="WarningLabel" destination="iXd-dv-Itn" id="zeO-ql-96P"/>
+                        <segue destination="hHh-KA-k8k" kind="presentation" identifier="LoginSegue" modalPresentationStyle="fullScreen" id="f1p-oL-k4J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DdX-Wz-mmU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3144.9275362318845" y="-125.22321428571428"/>
+            <point key="canvasLocation" x="-3123" y="-133"/>
         </scene>
         <!--Sign up-->
         <scene sceneID="MFl-hO-3uz">
@@ -518,7 +519,7 @@
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="34" id="ogE-fB-x44"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" textContentType="username"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pVb-Re-GqV">
                                                         <rect key="frame" x="0.0" y="59" width="334" height="34"/>
@@ -528,7 +529,7 @@
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="34" id="mJx-uT-fVC"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="new-password"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cDf-Vm-O10">
                                                         <rect key="frame" x="0.0" y="118" width="334" height="34"/>
@@ -538,7 +539,7 @@
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="34" id="wBP-8k-UAF"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="new-password"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Errors and warning label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTs-Lk-L8O">
                                                         <rect key="frame" x="0.0" y="177" width="334" height="20"/>
@@ -612,11 +613,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Sign up" id="4na-AH-Wiv"/>
                     <connections>
-                        <outlet property="ConfirmPasswordField" destination="cDf-Vm-O10" id="nSb-Aj-uLx"/>
-                        <outlet property="EmailTextField" destination="cDf-Vm-O10" id="gR7-36-dj1"/>
+                        <outlet property="ConfirmPasswordField" destination="cDf-Vm-O10" id="3ey-Ec-bQG"/>
+                        <outlet property="EmailTextField" destination="sA7-Mc-dkg" id="Gtq-IW-yNg"/>
                         <outlet property="PasswordTextField" destination="pVb-Re-GqV" id="n5f-XQ-z9t"/>
                         <outlet property="WarningLabel" destination="eTs-Lk-L8O" id="IRR-XI-BcV"/>
-                        <segue destination="hHh-KA-k8k" kind="presentation" id="r5a-hq-iIw"/>
+                        <segue destination="hHh-KA-k8k" kind="presentation" identifier="SignupSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="8sR-Et-BDC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BOI-kr-EGg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -627,6 +628,7 @@
         <scene sceneID="0kh-V0-QYU">
             <objects>
                 <tabBarController storyboardIdentifier="tabBarController" modalPresentationStyle="fullScreen" id="hHh-KA-k8k" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="JCw-m2-zta"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WR6-bl-2p0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -641,7 +643,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7NI-vm-Io2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1451" y="-132"/>
+            <point key="canvasLocation" x="-1452" y="-133"/>
         </scene>
         <!--Forgot password-->
         <scene sceneID="WBd-wh-hRG">
@@ -670,6 +672,9 @@
             <point key="canvasLocation" x="-2297" y="609"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="f1p-oL-k4J"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="LoginBackground" width="281" height="609"/>
         <image name="chart.bar.fill" catalog="system" width="128" height="89"/>

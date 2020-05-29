@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignupViewController: UIViewController {
     
@@ -15,6 +16,7 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var PasswordTextField: UITextField!
     @IBOutlet weak var ConfirmPasswordField: UITextField!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,8 +24,17 @@ class SignupViewController: UIViewController {
     }
     
     @IBAction func SignupPressed(_ sender: UIButton) {
-        if EmailTextField.text == "" {
-            WarningLabel.text = "Enter a valid email"
+    
+        // move all this to a struct in models
+        if let email = EmailTextField.text, let password = PasswordTextField.text {
+            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                if let e = error {
+                    self.WarningLabel.text = e.localizedDescription
+                } else {
+                    // print("Signed up")
+                    self.performSegue(withIdentifier: "SignupSegue", sender: self)
+                }
+            }
         }
     }
     
