@@ -17,6 +17,10 @@ class ForgotViewController: UIViewController {
         super.viewDidLoad()
 
         warningLabel.text = ""
+        
+        let color = UIColor.lightGray
+        let emailPlaceholder = emailTextField.placeholder ?? "" //There should be a placeholder set in storyboard or elsewhere string or pass empty
+        emailTextField.attributedPlaceholder = NSAttributedString(string: emailPlaceholder, attributes: [NSAttributedString.Key.foregroundColor : color])
     }
     
     @IBAction func returnToLogin(_ sender: UIButton) {

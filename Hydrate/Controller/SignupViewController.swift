@@ -21,6 +21,16 @@ class SignupViewController: UIViewController {
         super.viewDidLoad()
 
         WarningLabel.text = ""
+        
+        let color = UIColor.lightGray
+        let emailPlaceholder = EmailTextField.placeholder ?? "" //There should be a placeholder set in storyboard or elsewhere string or pass empty
+        EmailTextField.attributedPlaceholder = NSAttributedString(string: emailPlaceholder, attributes: [NSAttributedString.Key.foregroundColor : color])
+        
+        let passwordPlaceholder = PasswordTextField.placeholder ?? "" //There should be a placeholder set in storyboard or elsewhere string or pass empty
+        PasswordTextField.attributedPlaceholder = NSAttributedString(string: passwordPlaceholder, attributes: [NSAttributedString.Key.foregroundColor : color])
+        
+        let confirmPasswordPlaceholder = ConfirmPasswordField.placeholder ?? "" //There should be a placeholder set in storyboard or elsewhere string or pass empty
+        ConfirmPasswordField.attributedPlaceholder = NSAttributedString(string: confirmPasswordPlaceholder, attributes: [NSAttributedString.Key.foregroundColor : color])
     }
     
     @IBAction func SignupPressed(_ sender: UIButton) {
