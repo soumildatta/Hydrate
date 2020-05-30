@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SettingsViewController: UIViewController {
 
@@ -15,6 +16,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var setGoalStepper: UIStepper!
         
     let glassManager = GlassManager()
+    let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +33,33 @@ class SettingsViewController: UIViewController {
         setGoalLabel.text = "\(Int(sender.value)) glasses /day"
         GlassManager.sharedInstance.currentGoal = Float(sender.value)
     }
+    
+    @IBAction func applyChanges(_ sender: UIButton) {
+        // TODO: firebase saving done here
+        let dailyGoal = setGoalStepper.value
+        // TODO: picker, and notification
+        if let currentUser = Auth.auth().currentUser?.email {
+            db.collection(K.firebase.settingsCollection).document(currentUser).setData([
+                K.firebase.dailyGoalField: dailyGoal,
+                K.firebase.currentUserField: currentUser
+            ]) { (error) in
+                if let e = error {
+                    print("Error saving settings, \(e)")
+                } else {
+                    print("Settings saved successfully")
+                }
+            }
+        }
+    }
 }
 
 
 // MARK: - UIPickerView
 extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        // TODO
+    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         // the number of columns
