@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class SettingsViewController: UIViewController {
 
     @IBOutlet weak var glassSizePicker: UIPickerView!
     @IBOutlet weak var setGoalLabel: UILabel!
@@ -31,6 +31,11 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         setGoalLabel.text = "\(Int(sender.value)) glasses /day"
         GlassManager.sharedInstance.currentGoal = Float(sender.value)
     }
+}
+
+
+// MARK: - UIPickerView
+extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         // the number of columns
@@ -44,4 +49,5 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return glassManager.glassSizes[row] + "oz"
     }
+    
 }
