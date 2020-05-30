@@ -14,7 +14,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var glassSizePicker: UIPickerView!
     @IBOutlet weak var setGoalLabel: UILabel!
     @IBOutlet weak var setGoalStepper: UIStepper!
-        
+    @IBOutlet weak var notificationSwitch: UISwitch!
+    
     let glassManager = GlassManager()
     let db = Firestore.firestore()
     
@@ -34,8 +35,12 @@ class SettingsViewController: UIViewController {
         GlassManager.sharedInstance.currentGoal = Float(sender.value)
     }
     
+    @IBAction func notificationSwitchChanged(_ sender: UISwitch) {
+        print(sender.isOn)
+        // TODO: Implement notifications 
+    }
+    
     @IBAction func applyChanges(_ sender: UIButton) {
-        // TODO: firebase saving done here
         let dailyGoal = setGoalStepper.value
         // TODO: picker, and notification
         if let currentUser = Auth.auth().currentUser?.email {
@@ -56,6 +61,7 @@ class SettingsViewController: UIViewController {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
+            // pop to root, which is login view
             view.window?.rootViewController?.dismiss(animated: true, completion: nil)
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)

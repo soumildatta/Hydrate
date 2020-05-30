@@ -136,6 +136,9 @@
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rXi-0i-fu1">
                                                 <rect key="frame" x="286" y="0.0" width="51" height="27.666666666666668"/>
+                                                <connections>
+                                                    <action selector="notificationSwitchChanged:" destination="Plc-fJ-qfD" eventType="valueChanged" id="7Le-kv-Kf6"/>
+                                                </connections>
                                             </switch>
                                         </subviews>
                                     </stackView>
@@ -199,6 +202,7 @@
                     <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" id="VbZ-b3-cm6"/>
                     <connections>
                         <outlet property="glassSizePicker" destination="KSt-Wc-5ty" id="neP-T3-uva"/>
+                        <outlet property="notificationSwitch" destination="rXi-0i-fu1" id="vyR-f9-Ofx"/>
                         <outlet property="setGoalLabel" destination="JSi-5R-UyQ" id="53M-P9-bpe"/>
                         <outlet property="setGoalStepper" destination="a9d-T9-YrX" id="Roq-NK-ila"/>
                     </connections>
@@ -790,7 +794,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="zfF-lO-CVn"/>
+        <segue reference="8qS-ZW-EzG"/>
         <segue reference="f1p-oL-k4J"/>
     </inferredMetricsTieBreakers>
     <resources>
