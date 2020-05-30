@@ -25,20 +25,27 @@ class SignupViewController: UIViewController {
     
     @IBAction func SignupPressed(_ sender: UIButton) {
     
-        // move all this to a struct in models
-        if let email = EmailTextField.text, let password = PasswordTextField.text {
-            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                if let e = error {
-                    self.WarningLabel.text = e.localizedDescription
-                } else {
-                    // print("Signed up")
-                    self.performSegue(withIdentifier: "SignupSegue", sender: self)
+        if(passwordCheck(PasswordTextField.text ?? "", ConfirmPasswordField.text ?? "")) {
+            if let email = EmailTextField.text, let password = PasswordTextField.text {
+                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                    if let e = error {
+                        self.WarningLabel.text = e.localizedDescription
+                    } else {
+                        // print("Signed up")
+                        self.performSegue(withIdentifier: "SignupSegue", sender: self)
+                    }
                 }
             }
+        } else {
+            WarningLabel.text = "Passwords do not match"
         }
     }
     
     @IBAction func BackButtonPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func passwordCheck(_ password: String, _ confirmPassword: String) -> Bool {
+        return password == confirmPassword
     }
 }
