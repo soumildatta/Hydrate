@@ -28,6 +28,26 @@ class SettingsViewController: UIViewController {
         // initialize stepper value
         setGoalStepper.value = Double(glassManager.currentGoal)
         
+        
+        // in the future, make this call right when the user logs in, so that the data loads quicker
+        loadData()
+    }
+    
+    func loadData() {
+        if let currentUser = Auth.auth().currentUser?.email {
+            db.collection(K.firebase.settingsCollection).document(currentUser).getDocument { (document, error) in
+                if let document = document, document.exists {
+                    //set values
+                    if let goalValue = document[K.firebase.dailyGoalField] {
+                        self.setGoalStepper.value = goalValue as! Double
+                        self.setGoalLabel.text = "\(goalValue as! Int) glasses /day"
+                    }
+                    
+                } else {
+                    print("Settings do not currently exist")
+                }
+            }
+        }
     }
     
     @IBAction func setGoal(_ sender: UIStepper) {
