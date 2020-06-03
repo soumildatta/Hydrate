@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeViewController: UIViewController {
 
@@ -17,6 +18,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var glassStepper: UIStepper!
     
     let glassManager = GlassManager()
+    let db = Firestore.firestore()
     
     var current: Float = 0.0
     var percent: Float = 0.0
@@ -54,8 +56,19 @@ class HomeViewController: UIViewController {
     @IBAction func glassesStepper(_ sender: UIStepper) {
         // change current value based on stepper
         current = Float(sender.value)
-        print(GlassManager.sharedInstance.currentGoal)
-            
+
+        if let currentUser = Auth.auth().currentUser?.email {
+            db.collection(K.firebase.mainDataCollection).document(currentUser).setData([
+                K.firebase.currentCountField: current
+            ]) { (error) in
+                if let e = error {
+                    print("Error \(e)")
+                } else {
+                    print("Goal saved")
+                }
+            }
+        }
+        
         currentLabel.text = String(format: "%.0f/%.0f", current, GlassManager.sharedInstance.currentGoal)
             
         // progress bar and percent progression
@@ -72,3 +85,5 @@ class HomeViewController: UIViewController {
     }
     
 }
+
+// MARK: - Firestore

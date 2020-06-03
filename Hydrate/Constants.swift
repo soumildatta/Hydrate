@@ -12,6 +12,9 @@ struct K {
         static let currentUserField = "user"
         static let dailyGoalField = "goal"
         static let notificationStatusField = "notifications"
-        static let glassSizeField = "glass size"
+        static let glassSizeField = "glasSize"
+        
+        static let mainDataCollection = "main data"
+        static let currentCountField = "currentCount"
     }
 }
