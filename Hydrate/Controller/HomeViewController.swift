@@ -56,18 +56,7 @@ class HomeViewController: UIViewController {
     @IBAction func glassesStepper(_ sender: UIStepper) {
         // change current value based on stepper
         current = Float(sender.value)
-
-        if let currentUser = Auth.auth().currentUser?.email {
-            db.collection(K.firebase.mainDataCollection).document(currentUser).setData([
-                K.firebase.currentCountField: current
-            ]) { (error) in
-                if let e = error {
-                    print("Error \(e)")
-                } else {
-                    print("Goal saved")
-                }
-            }
-        }
+        sendCurrentValue(current)
         
         currentLabel.text = String(format: "%.0f/%.0f", current, GlassManager.sharedInstance.currentGoal)
             
@@ -86,4 +75,20 @@ class HomeViewController: UIViewController {
     
 }
 
+
 // MARK: - Firestore
+extension HomeViewController {
+    func sendCurrentValue(_ current: Float) {
+        if let currentUser = Auth.auth().currentUser?.email {
+            db.collection(K.firebase.mainDataCollection).document(currentUser).setData([
+                K.firebase.currentCountField: current
+            ]) { (error) in
+                if let e = error {
+                    print("Error \(e)")
+                } else {
+                    print("Goal saved")
+                }
+            }
+        }
+    }
+}
