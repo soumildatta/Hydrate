@@ -19,6 +19,9 @@ class SignupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        EmailTextField.delegate = self
+        PasswordTextField.delegate = self
+        ConfirmPasswordField.delegate = self
 
         WarningLabel.text = ""
         
@@ -35,7 +38,7 @@ class SignupViewController: UIViewController {
     
     @IBAction func SignupPressed(_ sender: UIButton) {
     
-        if(passwordCheck(PasswordTextField.text ?? "", ConfirmPasswordField.text ?? "")) {
+        if(PasswordTextField.text == ConfirmPasswordField.text) {
             if let email = EmailTextField.text, let password = PasswordTextField.text {
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                     if let e = error {
@@ -54,8 +57,17 @@ class SignupViewController: UIViewController {
     @IBAction func BackButtonPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    
-    func passwordCheck(_ password: String, _ confirmPassword: String) -> Bool {
-        return password == confirmPassword
+}
+
+
+// MARK: - UITextFieldDelegate
+extension SignupViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        EmailTextField.endEditing(true)
+        PasswordTextField.endEditing(true)
+        ConfirmPasswordField.endEditing(true)
+        return true
     }
+    
+    //TODO: hide keyboard when click on anything besides text boxes
 }
