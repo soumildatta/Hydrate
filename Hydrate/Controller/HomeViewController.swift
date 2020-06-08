@@ -29,19 +29,8 @@ class HomeViewController: UIViewController {
         
         // reload view every time it is clicked on
         // iniatialize progressbar and stepper values with new (possibly changed) currentGoal value
-        percent = current / GlassManager.sharedInstance.currentGoal
-        waterBar.setProgress(percent, animated: false)
-        glassStepper.value = Double(current)
         
-        if percent * 100 < 1000 {
-            percentLabel.text = String(format: "%.0f", percent * 100) + "%"
-        } else {
-            percentLabel.text = "999%"
-        }
-        
-        // set goal and number of glasses consumed today here
-        goalLabel.text = String(format: "Current Daily Goal: %.0f glasses", GlassManager.sharedInstance.currentGoal)
-        currentLabel.text = String(format: "%.0f/%.0f", current, GlassManager.sharedInstance.currentGoal)
+        setGoalItems(goal: GlassManager.sharedInstance.currentGoal)
 
         loadData()
     }
@@ -107,19 +96,7 @@ extension HomeViewController {
                         if let currentGoal = data?["goal"] as! Float?{
                             print(currentGoal)
                             
-                            self.percent = self.current / currentGoal
-                            self.waterBar.setProgress(self.percent, animated: false)
-                            self.glassStepper.value = Double(self.current)
-                            
-                            if self.percent * 100 < 1000 {
-                                self.percentLabel.text = String(format: "%.0f", self.percent * 100) + "%"
-                            } else {
-                                self.percentLabel.text = "999%"
-                            }
-                            
-                            // set goal and number of glasses consumed today here
-                            self.goalLabel.text = String(format: "Current Daily Goal: %.0f glasses", currentGoal)
-                            self.currentLabel.text = String(format: "%.0f/%.0f", self.current, currentGoal)
+                            self.setGoalItems(goal: currentGoal)
                             
                             self.goal = currentGoal
                         }
@@ -127,5 +104,25 @@ extension HomeViewController {
                 }
             }
         }
+    }
+}
+
+
+// MARK: - Reusable Methods
+extension HomeViewController {
+    func setGoalItems(goal: Float) {
+        percent = current / goal
+        waterBar.setProgress(percent, animated: false)
+        glassStepper.value = Double(current)
+        
+        if percent * 100 < 1000 {
+            percentLabel.text = String(format: "%.0f", percent * 100) + "%"
+        } else {
+            percentLabel.text = "999%"
+        }
+        
+        // set goal and number of glasses consumed today here
+        goalLabel.text = String(format: "Current Daily Goal: %.0f glasses", goal)
+        currentLabel.text = String(format: "%.0f/%.0f", current, goal)
     }
 }
