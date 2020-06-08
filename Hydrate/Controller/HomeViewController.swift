@@ -22,6 +22,7 @@ class HomeViewController: UIViewController {
     
     var current: Float = 0.0
     var percent: Float = 0.0
+    var goal: Float = GlassManager.sharedInstance.currentGoal
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
@@ -43,7 +44,54 @@ class HomeViewController: UIViewController {
         currentLabel.text = String(format: "%.0f/%.0f", current, GlassManager.sharedInstance.currentGoal)
 
         loadData()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+                
+        // making progress bar vertical and increasing width
+        waterBar.transform = waterBar.transform.rotated(by: 270 * .pi / 180)
+        waterBar.transform = waterBar.transform.scaledBy(x: 1.8, y: 100)
 
+    }
+    
+    @IBAction func glassesStepper(_ sender: UIStepper) {
+        // change current value based on stepper
+        current = Float(sender.value)
+        sendCurrentValue(current)
+        
+        currentLabel.text = String(format: "%.0f/%.0f", current, goal)
+            
+        // progress bar and percent progression
+        percent = current / goal
+        waterBar.setProgress(percent, animated: true)
+        
+        // limit percent to 999%
+        if percent * 100 < 1000 {
+            percentLabel.text = String(format: "%.0f", percent * 100) + "%"
+        } else {
+            percentLabel.text = "999%"
+        }
+        
+    }
+    
+}
+
+
+// MARK: - Firestore
+extension HomeViewController {
+    func sendCurrentValue(_ current: Float) {
+        if let currentUser = Auth.auth().currentUser?.email {
+            db.collection(K.firebase.mainDataCollection).document(currentUser).setData([
+                K.firebase.currentCountField: current
+            ]) { (error) in
+                if let e = error {
+                    print("Error \(e)")
+                } else {
+                    print("Current consumption saved")
+                }
+            }
+        }
     }
     
     func loadData() {
@@ -72,60 +120,12 @@ class HomeViewController: UIViewController {
                             // set goal and number of glasses consumed today here
                             self.goalLabel.text = String(format: "Current Daily Goal: %.0f glasses", currentGoal)
                             self.currentLabel.text = String(format: "%.0f/%.0f", self.current, currentGoal)
+                            
+                            self.goal = currentGoal
                         }
                     }
                 }
             }
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-                
-        // making progress bar vertical and increasing width
-        waterBar.transform = waterBar.transform.rotated(by: 270 * .pi / 180)
-        waterBar.transform = waterBar.transform.scaledBy(x: 1.8, y: 100)
-
-    }
-    
-    @IBAction func glassesStepper(_ sender: UIStepper) {
-        // change current value based on stepper
-        current = Float(sender.value)
-        sendCurrentValue(current)
-        
-        currentLabel.text = String(format: "%.0f/%.0f", current, GlassManager.sharedInstance.currentGoal)
-            
-        // progress bar and percent progression
-        percent = current / GlassManager.sharedInstance.currentGoal
-        waterBar.setProgress(percent, animated: true)
-        
-        // limit percent to 999%
-        if percent * 100 < 1000 {
-            percentLabel.text = String(format: "%.0f", percent * 100) + "%"
-        } else {
-            percentLabel.text = "999%"
-        }
-        
-    }
-    
-}
-
-
-// MARK: - Firestore
-extension HomeViewController {
-    func sendCurrentValue(_ current: Float) {
-        if let currentUser = Auth.auth().currentUser?.email {
-            db.collection(K.firebase.mainDataCollection).document(currentUser).setData([
-                K.firebase.currentCountField: current
-            ]) { (error) in
-                if let e = error {
-                    print("Error \(e)")
-                } else {
-                    print("Goal saved")
-                }
-            }
-        }
-    }
-    
-    
 }
