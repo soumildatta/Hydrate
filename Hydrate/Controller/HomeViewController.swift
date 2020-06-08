@@ -24,7 +24,7 @@ class HomeViewController: UIViewController {
     var percent: Float = 0.0
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
+        super.viewDidAppear(false)
         
         // reload view every time it is clicked on
         // iniatialize progressbar and stepper values with new (possibly changed) currentGoal value
@@ -42,6 +42,41 @@ class HomeViewController: UIViewController {
         goalLabel.text = String(format: "Current Daily Goal: %.0f glasses", GlassManager.sharedInstance.currentGoal)
         currentLabel.text = String(format: "%.0f/%.0f", current, GlassManager.sharedInstance.currentGoal)
 
+        loadData()
+
+    }
+    
+    func loadData() {
+        if let currentUser = Auth.auth().currentUser?.email {
+            db.collection(K.firebase.settingsCollection).document(currentUser).getDocument { (documentSnapshot, error) in
+                if let e = error {
+                    print("\(e)")
+                } else {
+                    if let document = documentSnapshot {
+                        
+                        let data = document.data()
+                        
+                        if let currentGoal = data?["goal"] as! Float?{
+                            print(currentGoal)
+                            
+                            self.percent = self.current / currentGoal
+                            self.waterBar.setProgress(self.percent, animated: false)
+                            self.glassStepper.value = Double(self.current)
+                            
+                            if self.percent * 100 < 1000 {
+                                self.percentLabel.text = String(format: "%.0f", self.percent * 100) + "%"
+                            } else {
+                                self.percentLabel.text = "999%"
+                            }
+                            
+                            // set goal and number of glasses consumed today here
+                            self.goalLabel.text = String(format: "Current Daily Goal: %.0f glasses", currentGoal)
+                            self.currentLabel.text = String(format: "%.0f/%.0f", self.current, currentGoal)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -91,4 +126,6 @@ extension HomeViewController {
             }
         }
     }
+    
+    
 }
