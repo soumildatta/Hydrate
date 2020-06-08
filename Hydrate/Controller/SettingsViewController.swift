@@ -44,11 +44,19 @@ class SettingsViewController: UIViewController {
     
     @IBAction func applyChanges(_ sender: UIButton) {
         GlassManager.sharedInstance.currentGoal = Float(setGoalStepper.value)
+        
+        // goal value
         let dailyGoal = setGoalStepper.value
+        
+        // glass size picker value
+        let glassSizeRow = glassSizePicker.selectedRow(inComponent: 0)
+        
         // TODO: picker, and notification
         if let currentUser = Auth.auth().currentUser?.email {
             db.collection(K.firebase.settingsCollection).document(currentUser).setData([
                 K.firebase.dailyGoalField: dailyGoal,
+                K.firebase.glassSizeField: glassSizeRow,
+                K.firebase.notificationStatusField: notificationSwitch.isOn,
                 K.firebase.currentUserField: currentUser
             ]) { (error) in
                 if let e = error {
@@ -81,6 +89,8 @@ extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // TODO
+        // print(glassManager.glassSizes[row])
+
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -109,6 +119,14 @@ extension SettingsViewController {
                     if let goalValue = document[K.firebase.dailyGoalField] {
                         self.setGoalStepper.value = goalValue as! Double
                         self.setGoalLabel.text = "\(goalValue as! Int) glasses /day"
+                    }
+                    
+                    if let glassSizeRow = document[K.firebase.glassSizeField] {
+                        print(glassSizeRow)
+                    }
+                    
+                    if let notificationOption = document[K.firebase.notificationStatusField] {
+                        self.notificationSwitch.isOn = notificationOption as! Bool
                     }
                     
                 } else {
