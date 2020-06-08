@@ -44,3 +44,14 @@ class ForgotViewController: UIViewController {
         
     }
 }
+
+// MARK: - UITextFieldDelegate
+extension ForgotViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        emailTextField.endEditing(true)
+        
+        return true
+    }
+    
+    //TODO: hide keyboard when click on anything besides text boxes
+}
