@@ -17,6 +17,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        EmailTextField.delegate = self
+        PasswordTextField.delegate = self
         
         WarningLabel.text = ""
         
@@ -40,5 +42,17 @@ class LoginViewController: UIViewController {
             }
         }
     }
+}
+
+
+// MARK: - UITextFieldDelegate
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        EmailTextField.endEditing(true)
+        PasswordTextField.endEditing(true)
+        
+        return true
+    }
     
+    //TODO: hide keyboard when click on anything besides text boxes
 }
