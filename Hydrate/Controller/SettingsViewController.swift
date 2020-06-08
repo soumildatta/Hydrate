@@ -35,7 +35,6 @@ class SettingsViewController: UIViewController {
     
     @IBAction func setGoal(_ sender: UIStepper) {
         setGoalLabel.text = "\(Int(sender.value)) glasses /day"
-        GlassManager.sharedInstance.currentGoal = Float(sender.value)
     }
     
     @IBAction func notificationSwitchChanged(_ sender: UISwitch) {
@@ -44,6 +43,7 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func applyChanges(_ sender: UIButton) {
+        GlassManager.sharedInstance.currentGoal = Float(setGoalStepper.value)
         let dailyGoal = setGoalStepper.value
         // TODO: picker, and notification
         if let currentUser = Auth.auth().currentUser?.email {
