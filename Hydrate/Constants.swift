@@ -16,5 +16,7 @@ struct K {
         
         static let mainDataCollection = "main data"
         static let currentCountField = "currentCount"
+        static let dateStringField = "date"
+        static let secondDocField = "items"
     }
 }

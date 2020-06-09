@@ -24,15 +24,26 @@ class HomeViewController: UIViewController {
     var percent: Float = 0.0
     var goal: Float = GlassManager.sharedInstance.currentGoal
     
+    var date = Date()
+    var datestring: String = ""
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         
         // reload view every time it is clicked on
         // iniatialize progressbar and stepper values with new (possibly changed) currentGoal value
         
-        setGoalItems(goal: GlassManager.sharedInstance.currentGoal)
+        // setGoalItems(goal: GlassManager.sharedInstance.currentGoal, currentValue: current)
+        
+        // handle date
+        date = Date()
+        let df = DateFormatter()
+        df.dateFormat = "MM-dd-yyyy"
+        datestring = df.string(from: date)
+        //print(datestring)
 
-        loadData()
+        loadGoalData()
+        loadMainData(datestring)
     }
     
     override func viewDidLoad() {
@@ -47,7 +58,7 @@ class HomeViewController: UIViewController {
     @IBAction func glassesStepper(_ sender: UIStepper) {
         // change current value based on stepper
         current = Float(sender.value)
-        sendCurrentValue(current)
+        sendCurrentValue(current, datestring)
         
         currentLabel.text = String(format: "%.0f/%.0f", current, goal)
             
@@ -69,10 +80,11 @@ class HomeViewController: UIViewController {
 
 // MARK: - Firestore
 extension HomeViewController {
-    func sendCurrentValue(_ current: Float) {
+    func sendCurrentValue(_ current: Float, _ date: String) {
         if let currentUser = Auth.auth().currentUser?.email {
-            db.collection(K.firebase.mainDataCollection).document(currentUser).setData([
-                K.firebase.currentCountField: current
+            db.collection(K.firebase.mainDataCollection).document(currentUser).collection(date).document(K.firebase.secondDocField).setData([
+                K.firebase.currentCountField: current,
+                K.firebase.dateStringField: date
             ]) { (error) in
                 if let e = error {
                     print("Error \(e)")
@@ -83,8 +95,9 @@ extension HomeViewController {
         }
     }
     
-    func loadData() {
-        if let currentUser = Auth.auth().currentUser?.email {
+    // get goals and glass size settings
+    func loadGoalData() {
+        if let currentUser = Auth.auth().currentUser?.email{
             db.collection(K.firebase.settingsCollection).document(currentUser).getDocument { (documentSnapshot, error) in
                 if let e = error {
                     print("\(e)")
@@ -94,11 +107,33 @@ extension HomeViewController {
                         let data = document.data()
                         
                         if let currentGoal = data?["goal"] as! Float?{
-                            print(currentGoal)
-                            
-                            self.setGoalItems(goal: currentGoal)
+                            self.setGoalItems(goal: currentGoal, currentValue: self.current)
                             
                             self.goal = currentGoal
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // load current values by date
+    func loadMainData(_ date: String) {
+        if let currentUser = Auth.auth().currentUser?.email{
+            
+            db.collection(K.firebase.mainDataCollection).document(currentUser).collection(date).document(K.firebase.secondDocField).getDocument { (documentSnapshot, error) in
+                if let e = error {
+                    print("\(e)")
+                } else {
+                    if let document = documentSnapshot {
+                        let data = document.data()
+                        
+                        if let currentValue = data?["currentCount"] as! Float? {
+                            // current
+                            //print(currentValue)
+                            self.setGoalItems(goal: self.goal, currentValue: currentValue)
+                            
+                            self.current = currentValue
                         }
                     }
                 }
@@ -110,19 +145,21 @@ extension HomeViewController {
 
 // MARK: - Reusable Methods
 extension HomeViewController {
-    func setGoalItems(goal: Float) {
-        percent = current / goal
-        waterBar.setProgress(percent, animated: false)
-        glassStepper.value = Double(current)
+    func setGoalItems(goal: Float, currentValue: Float) {
+        
+        print(currentValue)
+        
+        percent = currentValue / goal
+        waterBar.setProgress(percent, animated: true)
+        glassStepper.value = Double(currentValue)
         
         if percent * 100 < 1000 {
             percentLabel.text = String(format: "%.0f", percent * 100) + "%"
         } else {
             percentLabel.text = "999%"
         }
-        
         // set goal and number of glasses consumed today here
         goalLabel.text = String(format: "Current Daily Goal: %.0f glasses", goal)
-        currentLabel.text = String(format: "%.0f/%.0f", current, goal)
+        currentLabel.text = String(format: "%.0f/%.0f", currentValue, goal)
     }
 }
