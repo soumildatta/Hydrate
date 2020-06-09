@@ -18,6 +18,7 @@ class StatsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         calendar.delegate = self
+        calendar.dataSource = self
     }
     
 
@@ -34,7 +35,7 @@ class StatsViewController: UIViewController {
 }
 
 // MARK: - FSCalendar
-extension StatsViewController: FSCalendarDelegate {
+extension StatsViewController: FSCalendarDelegate, FSCalendarDataSource {
     
     // getting the current device time and date
 //    let date = Date()
@@ -43,4 +44,24 @@ extension StatsViewController: FSCalendarDelegate {
 //    let dateString = df.string(from: date)
 //    print(dateString)
     
+    // https://stackoverflow.com/questions/52218935/fscalendar-event-dots-not-showing
+    
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        let df = DateFormatter()
+        df.dateFormat = "mm-dd-yyyy"
+        let datestring = df.string(from: date)
+        //print(datestring)
+        
+//        if(Int(datestring)! % 2 == 0) {
+//            return 1
+//        }
+        
+        return 0
+    }
+    
+    func calendar(_ calendar: FSCalendar, willDisplay cell: FSCalendarCell, for date: Date, at monthPosition: FSCalendarMonthPosition) {
+
+        cell.numberOfEvents = 1
+        //print(cell.numberOfEvents)
+    }
 }
