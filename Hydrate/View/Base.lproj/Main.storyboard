@@ -701,7 +701,6 @@
                         <color key="barTintColor" red="0.79010160803434515" green="0.92473705554694308" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
-                        <segue destination="aeZ-SY-BtT" kind="relationship" relationship="viewControllers" id="VDM-aS-OlX"/>
                         <segue destination="pFe-ix-nw8" kind="relationship" relationship="viewControllers" id="FEf-UL-voN"/>
                         <segue destination="Plc-fJ-qfD" kind="relationship" relationship="viewControllers" id="GWY-yo-HC1"/>
                     </connections>

@@ -48,20 +48,22 @@ extension StatsViewController: FSCalendarDelegate, FSCalendarDataSource {
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         let df = DateFormatter()
-        df.dateFormat = "mm-dd-yyyy"
+        df.dateFormat = "dd"
         let datestring = df.string(from: date)
         //print(datestring)
         
-//        if(Int(datestring)! % 2 == 0) {
-//            return 1
-//        }
+        
+        // testing - events on even days
+        if(Int(datestring)! % 2 == 0) {
+            return 1
+        }
         
         return 0
     }
     
     func calendar(_ calendar: FSCalendar, willDisplay cell: FSCalendarCell, for date: Date, at monthPosition: FSCalendarMonthPosition) {
 
-        cell.numberOfEvents = 1
+//        cell.numberOfEvents = 1
         //print(cell.numberOfEvents)
     }
 }

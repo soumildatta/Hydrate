@@ -27,6 +27,8 @@ class HomeViewController: UIViewController {
     var date = Date()
     var datestring: String = ""
     
+    var goalComplete: Bool = false
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         
@@ -73,6 +75,10 @@ class HomeViewController: UIViewController {
             percentLabel.text = "999%"
         }
         
+        // complete daily goal
+        if percent >= 0.1 {
+            goalComplete = true
+        }
     }
     
 }
