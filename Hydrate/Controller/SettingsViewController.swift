@@ -31,35 +31,11 @@ class SettingsViewController: UIViewController {
         // initialize stepper value
         setGoalStepper.value = Double(glassManager.currentGoal)
         
-        
         // in the future, make this call right when the user logs in, so that the data loads quicker
         loadData()
         
-        
-        
-        // create notification content
-        let content = UNMutableNotificationContent()
-        content.title = "Daily Hydrate Reminder"
-        content.body = "Don't forget to log your consumption and complete your daily goal!"
-        
-        // create notification trigger
-        var dateComponents = DateComponents()
-        dateComponents.calendar = Calendar.current
-        dateComponents.hour = 18
-        
-        // get the current date
-//        let date = Date().addingTimeInterval(10)
-//        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        
-        // create the request
-        let uuid = UUID().uuidString
-        let request = UNNotificationRequest(identifier: uuid, content: content, trigger: trigger)
-        
-        center.add(request) { (err) in
-            // catch error
-        }
+        // create daily notification
+        createNotification()
     }
     
     @IBAction func setGoal(_ sender: UIStepper) {
@@ -74,21 +50,12 @@ class SettingsViewController: UIViewController {
 
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in
                 self.present(alert, animated: true)
-                self.center.requestAuthorization(options: [.alert, .sound], completionHandler: {(granted, err)  in
-                    // notification access granted or denied
-                    // present alert if denied
-                    if(!granted) {
-                        let notifDenied = UIAlertController(title: "Notifications not allowed on this device", message: "If you change your mind later, you can change the notification preferences from the system settings for the app.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
-                        self.present(notifDenied, animated: true)
-                    }
-                })
+                self.authorizeNotifications()
             }))
             alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
             self.present(alert, animated: true)
             
         } else {
-            
             let alert = UIAlertController(title: "Disable notifications from settings", message: "You will be taken into the system settings for this app, where you can change the notification preferences. Are you sure you want to continue?", preferredStyle: .alert)
 
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in
@@ -105,29 +72,8 @@ class SettingsViewController: UIViewController {
     @IBAction func applyChanges(_ sender: UIButton) {
         GlassManager.sharedInstance.currentGoal = Float(setGoalStepper.value)
         
-        // goal value
-        let dailyGoal = setGoalStepper.value
-        
-        // glass size picker value
-        let glassSizeRow = glassSizePicker.selectedRow(inComponent: 0)
-        
-        // TODO: picker, and notification
-        if let currentUser = Auth.auth().currentUser?.email {
-            db.collection(K.firebase.settingsCollection).document(currentUser).setData([
-                K.firebase.dailyGoalField: dailyGoal,
-                K.firebase.glassSizeField: glassSizeRow,
-                K.firebase.notificationStatusField: notificationSwitch.isOn,
-                K.firebase.currentUserField: currentUser
-            ]) { (error) in
-                if let e = error {
-                    print("Error saving settings, \(e)")
-                } else {
-                    print("Settings saved successfully")
-                }
-            }
-        }
-        
-        // print("Here it is \(glassManager.loadGoal())")
+        // store changes in firebase
+        storeChanges(dailyGoal: setGoalStepper.value, glassSize: glassSizePicker.selectedRow(inComponent: 0), notificationOption: notificationSwitch.isOn)
     }
     
     @IBAction func logOutPressed(_ sender: UIButton) {
@@ -150,7 +96,6 @@ extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // TODO
         // print(glassManager.glassSizes[row])
-
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -194,5 +139,61 @@ extension SettingsViewController {
                 }
             }
         }
+    }
+    
+    func storeChanges(dailyGoal:Double, glassSize:Int, notificationOption:Bool) {
+        if let currentUser = Auth.auth().currentUser?.email {
+            db.collection(K.firebase.settingsCollection).document(currentUser).setData([
+                K.firebase.dailyGoalField: dailyGoal,
+                K.firebase.glassSizeField: glassSize,
+                K.firebase.notificationStatusField: notificationOption,
+                K.firebase.currentUserField: currentUser
+            ]) { (error) in
+                if let e = error {
+                    print("Error saving settings, \(e)")
+                } else {
+                    print("Settings saved successfully")
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Notification initialization
+extension SettingsViewController {
+    func createNotification() {
+        // create notification content
+        let content = UNMutableNotificationContent()
+        content.title = "Daily Hydrate Reminder"
+        content.body = "Don't forget to log your consumption and complete your daily goal!"
+        
+        // create notification trigger
+        var dateComponents = DateComponents()
+        dateComponents.calendar = Calendar.current
+        dateComponents.hour = 18
+        
+        // testing notifications
+        //        let date = Date().addingTimeInterval(10)
+        //        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        
+        // create the request
+        let uuid = UUID().uuidString
+        let request = UNNotificationRequest(identifier: uuid, content: content, trigger: trigger)
+        
+        center.add(request, withCompletionHandler: nil)
+    }
+    
+    func authorizeNotifications() {
+        center.requestAuthorization(options: [.alert, .sound], completionHandler: {(granted, err)  in
+            // notification access granted or denied
+            // present alert if denied
+            if(!granted) {
+                let notifDenied = UIAlertController(title: "Notifications not allowed on this device", message: "If you change your mind later, you can change the notification preferences from the system settings for the app.", preferredStyle: .alert)
+                notifDenied.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+                self.present(notifDenied, animated: true)
+            }
+        })
     }
 }

@@ -34,6 +34,11 @@ class SignupViewController: UIViewController {
         
         let confirmPasswordPlaceholder = ConfirmPasswordField.placeholder ?? "" //There should be a placeholder set in storyboard or elsewhere string or pass empty
         ConfirmPasswordField.attributedPlaceholder = NSAttributedString(string: confirmPasswordPlaceholder, attributes: [NSAttributedString.Key.foregroundColor : color])
+        
+        
+        // end editing when clicked outside of keyboard
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
     }
     
     @IBAction func SignupPressed(_ sender: UIButton) {
@@ -63,11 +68,7 @@ class SignupViewController: UIViewController {
 // MARK: - UITextFieldDelegate
 extension SignupViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        EmailTextField.endEditing(true)
-        PasswordTextField.endEditing(true)
-        ConfirmPasswordField.endEditing(true)
+        textField.resignFirstResponder()
         return true
     }
-    
-    //TODO: hide keyboard when click on anything besides text boxes
 }

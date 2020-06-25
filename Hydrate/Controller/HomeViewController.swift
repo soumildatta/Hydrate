@@ -22,10 +22,11 @@ class HomeViewController: UIViewController {
     
     var current: Float = 0.0
     var percent: Float = 0.0
+    // get goal from settings
     var goal: Float = GlassManager.sharedInstance.currentGoal
     
     var date = Date()
-    var datestring: String = ""
+    var currentDateString: String = ""
     
     var goalComplete: Bool = false
     
@@ -41,11 +42,11 @@ class HomeViewController: UIViewController {
         date = Date()
         let df = DateFormatter()
         df.dateFormat = "MM-dd-yyyy"
-        datestring = df.string(from: date)
+        currentDateString = df.string(from: date)
         //print(datestring)
 
         loadGoalData()
-        loadMainData(datestring)
+        loadMainData(currentDateString)
     }
     
     override func viewDidLoad() {
@@ -60,7 +61,7 @@ class HomeViewController: UIViewController {
     @IBAction func glassesStepper(_ sender: UIStepper) {
         // change current value based on stepper
         current = Float(sender.value)
-        sendCurrentValue(current, datestring)
+        sendCurrentValue(current, currentDateString)
         
         currentLabel.text = String(format: "%.0f/%.0f", current, goal)
             
@@ -95,7 +96,7 @@ extension HomeViewController {
                 if let e = error {
                     print("Error \(e)")
                 } else {
-                    print("Current consumption saved")
+                    //successful 
                 }
             }
         }
@@ -123,7 +124,7 @@ extension HomeViewController {
         }
     }
     
-    // load current values by date
+    // load consumption values by current date
     func loadMainData(_ date: String) {
         if let currentUser = Auth.auth().currentUser?.email{
             
@@ -152,9 +153,7 @@ extension HomeViewController {
 // MARK: - Reusable Methods
 extension HomeViewController {
     func setGoalItems(goal: Float, currentValue: Float) {
-        
-        print(currentValue)
-        
+                
         percent = currentValue / goal
         waterBar.setProgress(percent, animated: true)
         glassStepper.value = Double(currentValue)

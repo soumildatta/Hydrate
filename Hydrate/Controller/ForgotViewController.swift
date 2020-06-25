@@ -21,6 +21,11 @@ class ForgotViewController: UIViewController {
         let color = UIColor.lightGray
         let emailPlaceholder = emailTextField.placeholder ?? "" //There should be a placeholder set in storyboard or elsewhere string or pass empty
         emailTextField.attributedPlaceholder = NSAttributedString(string: emailPlaceholder, attributes: [NSAttributedString.Key.foregroundColor : color])
+        
+        
+        // end editing when clicked outside of keyboard
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
     }
     
     @IBAction func returnToLogin(_ sender: UIButton) {
@@ -48,10 +53,7 @@ class ForgotViewController: UIViewController {
 // MARK: - UITextFieldDelegate
 extension ForgotViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        emailTextField.endEditing(true)
-        
+        textField.resignFirstResponder()
         return true
     }
-    
-    //TODO: hide keyboard when click on anything besides text boxes
 }

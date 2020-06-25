@@ -28,6 +28,11 @@ class LoginViewController: UIViewController {
         
         let passwordPlaceholder = PasswordTextField.placeholder ?? "" //There should be a placeholder set in storyboard or elsewhere string or pass empty
         PasswordTextField.attributedPlaceholder = NSAttributedString(string: passwordPlaceholder, attributes: [NSAttributedString.Key.foregroundColor : color])
+        
+        
+        // end editing when clicked outside of keyboard
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
     }
     
     @IBAction func LoginPressed(_ sender: UIButton) {
@@ -48,11 +53,7 @@ class LoginViewController: UIViewController {
 // MARK: - UITextFieldDelegate
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        EmailTextField.endEditing(true)
-        PasswordTextField.endEditing(true)
-        
+        textField.resignFirstResponder()
         return true
     }
-    
-    //TODO: hide keyboard when click on anything besides text boxes
 }
