@@ -42,14 +42,17 @@ class SettingsViewController: UIViewController {
     }
     
     typealias AlertMethodHandler = () -> Void
+    typealias AlertMethodHandlerNo = () -> Void
     // reusable alert method
     func presentAlert(title titleString:String, message messageString:String, alertYesClicked:@escaping AlertMethodHandler) {
         let alert = UIAlertController(title: titleString, message: messageString, preferredStyle: .alert)
-
+        
+        alert.addAction(UIAlertAction(title: "No", style: .destructive, handler: {action in
+            self.notificationSwitch.isOn = true
+        }))
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in
             alertYesClicked()
         }))
-        alert.addAction(UIAlertAction(title: "No", style: .destructive, handler: nil))
 
         self.present(alert, animated: true)
     }
