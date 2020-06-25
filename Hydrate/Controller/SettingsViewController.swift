@@ -43,12 +43,13 @@ class SettingsViewController: UIViewController {
         content.body = "Don't forget to log your consumption and complete your daily goal!"
         
         // create notification trigger
-//        var dateComponents = DateComponents()
-//        dateComponents.calendar = Calendar.current
+        var dateComponents = DateComponents()
+        dateComponents.calendar = Calendar.current
+        dateComponents.hour = 18
         
         // get the current date
-        let date = Date().addingTimeInterval(10)
-        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+//        let date = Date().addingTimeInterval(10)
+//        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         
@@ -69,9 +70,23 @@ class SettingsViewController: UIViewController {
         print(sender.isOn)
         // TODO: Implement notifications
         if(sender.isOn) {
-            center.requestAuthorization(options: [.alert, .sound]) { (bool, err) in
-                // alert user that they can change the settings here later
-            }
+            let alert = UIAlertController(title: "Are you sure you want to turn on daily notifications?", message: "The app will send you a notification daily at 6pm to remind you to drink water", preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in
+                self.present(alert, animated: true)
+                self.center.requestAuthorization(options: [.alert, .sound], completionHandler: {(granted, err)  in
+                    // notification access granted or denied
+                    // present alert if denied
+                    if(!granted) {
+                        let notifDenied = UIAlertController(title: "Notifications not allowed on this device", message: "If you change your mind later, you can change the notification preferences from the system settings for the app.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+                        self.present(notifDenied, animated: true)
+                    }
+                })
+            }))
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+            
         } else {
             
             let alert = UIAlertController(title: "Disable notifications from settings", message: "You will be taken into the system settings for this app, where you can change the notification preferences. Are you sure you want to continue?", preferredStyle: .alert)
