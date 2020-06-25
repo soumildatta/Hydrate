@@ -31,7 +31,6 @@ class SettingsViewController: UIViewController {
         // initialize stepper value
         setGoalStepper.value = Double(glassManager.currentGoal)
         
-        // in the future, make this call right when the user logs in, so that the data loads quicker
         loadData()
         
         // create daily notification
@@ -42,30 +41,30 @@ class SettingsViewController: UIViewController {
         setGoalLabel.text = "\(Int(sender.value)) glasses /day"
     }
     
+    typealias AlertMethodHandler = () -> Void
+    // reusable alert method
+    func presentAlert(title titleString:String, message messageString:String, alertYesClicked:@escaping AlertMethodHandler) {
+        let alert = UIAlertController(title: titleString, message: messageString, preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in
+            alertYesClicked()
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .destructive, handler: nil))
+
+        self.present(alert, animated: true)
+    }
+    
     @IBAction func notificationSwitchChanged(_ sender: UISwitch) {
-        print(sender.isOn)
-        // TODO: Implement notifications
         if(sender.isOn) {
-            let alert = UIAlertController(title: "Are you sure you want to turn on daily notifications?", message: "The app will send you a notification daily at 6pm to remind you to drink water", preferredStyle: .alert)
-
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in
-                self.present(alert, animated: true)
+            presentAlert(title: "Are you sure you want to turn on daily notifications?", message: "The app will send you a notification daily at 6pm to remind you to drink water") {
                 self.authorizeNotifications()
-            }))
-            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-            self.present(alert, animated: true)
-            
+            }
         } else {
-            let alert = UIAlertController(title: "Disable notifications from settings", message: "You will be taken into the system settings for this app, where you can change the notification preferences. Are you sure you want to continue?", preferredStyle: .alert)
-
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in
+            presentAlert(title: "Disable notifications from settings", message: "You will be taken into the system settings for this app, where you can change the notification preferences. Are you sure you want to continue?") {
                 if let aString = URL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.open(aString, options: [:], completionHandler: nil)
                 }
-            }))
-            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-
-            self.present(alert, animated: true)
+            }
         }
     }
     
