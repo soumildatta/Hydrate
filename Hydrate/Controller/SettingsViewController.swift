@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
 class SettingsViewController: UIViewController {
 
@@ -18,6 +19,8 @@ class SettingsViewController: UIViewController {
     
     let glassManager = GlassManager()
     let db = Firestore.firestore()
+    
+    let center = UNUserNotificationCenter.current()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +34,31 @@ class SettingsViewController: UIViewController {
         
         // in the future, make this call right when the user logs in, so that the data loads quicker
         loadData()
+        
+        
+        
+        // create notification content
+        let content = UNMutableNotificationContent()
+        content.title = "Daily Hydrate Reminder"
+        content.body = "Don't forget to log your consumption and complete your daily goal!"
+        
+        // create notification trigger
+//        var dateComponents = DateComponents()
+//        dateComponents.calendar = Calendar.current
+        
+        // get the current date
+        let date = Date().addingTimeInterval(10)
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        
+        // create the request
+        let uuid = UUID().uuidString
+        let request = UNNotificationRequest(identifier: uuid, content: content, trigger: trigger)
+        
+        center.add(request) { (err) in
+            // catch error
+        }
     }
     
     @IBAction func setGoal(_ sender: UIStepper) {
@@ -39,7 +67,24 @@ class SettingsViewController: UIViewController {
     
     @IBAction func notificationSwitchChanged(_ sender: UISwitch) {
         print(sender.isOn)
-        // TODO: Implement notifications 
+        // TODO: Implement notifications
+        if(sender.isOn) {
+            center.requestAuthorization(options: [.alert, .sound]) { (bool, err) in
+                // alert user that they can change the settings here later
+            }
+        } else {
+            
+            let alert = UIAlertController(title: "Disable notifications from settings", message: "You will be taken into the system settings for this app, where you can change the notification preferences. Are you sure you want to continue?", preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in
+                if let aString = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(aString, options: [:], completionHandler: nil)
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+            self.present(alert, animated: true)
+        }
     }
     
     @IBAction func applyChanges(_ sender: UIButton) {
