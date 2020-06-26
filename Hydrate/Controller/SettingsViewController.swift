@@ -130,6 +130,7 @@ extension SettingsViewController {
                     
                     if let glassSizeRow = document[K.firebase.glassSizeField] {
                         print(glassSizeRow)
+                        self.glassSizePicker.selectRow(glassSizeRow as! Int, inComponent: 0, animated: true)
                     }
                     
                     if let notificationOption = document[K.firebase.notificationStatusField] {
