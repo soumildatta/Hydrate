@@ -42,7 +42,9 @@ class LoginViewController: UIViewController {
                 if let e = error {
                     self.WarningLabel.text = e.localizedDescription
                 } else {
-                     self.performSegue(withIdentifier: "LoginSegue", sender: self)
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "LoginSegue", sender: self)
+                    }
                 }
             }
         }

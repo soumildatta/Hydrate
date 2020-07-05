@@ -110,11 +110,12 @@ extension HomeViewController {
                     print("\(e)")
                 } else {
                     if let document = documentSnapshot {
-                        
                         let data = document.data()
                         
                         if let currentGoal = data?["goal"] as! Float?{
-                            self.setGoalItems(goal: currentGoal, currentValue: self.current)
+                            DispatchQueue.main.async {
+                                self.setGoalItems(goal: currentGoal, currentValue: self.current)
+                            }
                             
                             self.goal = currentGoal
                         }
@@ -138,7 +139,9 @@ extension HomeViewController {
                         if let currentValue = data?["currentCount"] as! Float? {
                             // current
                             //print(currentValue)
-                            self.setGoalItems(goal: self.goal, currentValue: currentValue)
+                            DispatchQueue.main.async {
+                                self.setGoalItems(goal: self.goal, currentValue: currentValue)
+                            }
                             
                             self.current = currentValue
                         }

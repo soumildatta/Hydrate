@@ -48,7 +48,9 @@ class SettingsViewController: UIViewController {
         let alert = UIAlertController(title: titleString, message: messageString, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "No", style: .destructive, handler: {action in
-            self.notificationSwitch.isOn = true
+            DispatchQueue.main.async {
+                self.notificationSwitch.isOn = true
+            }
         }))
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in
             alertYesClicked()
@@ -124,17 +126,22 @@ extension SettingsViewController {
                 if let document = document, document.exists {
                     //set values
                     if let goalValue = document[K.firebase.dailyGoalField] {
-                        self.setGoalStepper.value = goalValue as! Double
-                        self.setGoalLabel.text = "\(goalValue as! Int) glasses /day"
+                        DispatchQueue.main.async {
+                            self.setGoalStepper.value = goalValue as! Double
+                            self.setGoalLabel.text = "\(goalValue as! Int) glasses /day"
+                        }
                     }
                     
                     if let glassSizeRow = document[K.firebase.glassSizeField] {
-                        print(glassSizeRow)
-                        self.glassSizePicker.selectRow(glassSizeRow as! Int, inComponent: 0, animated: true)
+                        DispatchQueue.main.async {
+                            self.glassSizePicker.selectRow(glassSizeRow as! Int, inComponent: 0, animated: true)
+                        }
                     }
                     
                     if let notificationOption = document[K.firebase.notificationStatusField] {
-                        self.notificationSwitch.isOn = notificationOption as! Bool
+                        DispatchQueue.main.async {
+                            self.notificationSwitch.isOn = notificationOption as! Bool
+                        }
                     }
                     
                 } else {
@@ -193,9 +200,11 @@ extension SettingsViewController {
             // notification access granted or denied
             // present alert if denied
             if(!granted) {
-                let notifDenied = UIAlertController(title: "Notifications not allowed on this device", message: "If you change your mind later, you can change the notification preferences from the system settings for the app.", preferredStyle: .alert)
-                notifDenied.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
-                self.present(notifDenied, animated: true)
+                DispatchQueue.main.async {
+                    let notifDenied = UIAlertController(title: "Notifications not allowed on this device", message: "If you change your mind later, you can change the notification preferences from the system settings for the app.", preferredStyle: .alert)
+                    notifDenied.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+                    self.present(notifDenied, animated: true)
+                }
             }
         })
     }

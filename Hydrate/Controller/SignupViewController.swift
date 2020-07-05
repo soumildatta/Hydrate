@@ -47,10 +47,14 @@ class SignupViewController: UIViewController {
             if let email = EmailTextField.text, let password = PasswordTextField.text {
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                     if let e = error {
-                        self.WarningLabel.text = e.localizedDescription
+                        DispatchQueue.main.async {
+                            self.WarningLabel.text = e.localizedDescription
+                        }
                     } else {
                         // print("Signed up")
-                        self.performSegue(withIdentifier: "SignupSegue", sender: self)
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "SignupSegue", sender: self)
+                        }
                     }
                 }
             }
