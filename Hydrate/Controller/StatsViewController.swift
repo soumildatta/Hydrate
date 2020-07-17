@@ -8,10 +8,13 @@
 
 import UIKit
 import FSCalendar
+import Firebase
 
 class StatsViewController: UIViewController {
 
     @IBOutlet weak var calendar: FSCalendar!
+    
+    let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,18 +23,6 @@ class StatsViewController: UIViewController {
         calendar.delegate = self
         calendar.dataSource = self
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 // MARK: - FSCalendar
@@ -47,23 +38,36 @@ extension StatsViewController: FSCalendarDelegate, FSCalendarDataSource {
     // https://stackoverflow.com/questions/52218935/fscalendar-event-dots-not-showing
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let df = DateFormatter()
-        df.dateFormat = "dd"
-        let datestring = df.string(from: date)
-        //print(datestring)
-        
-        
-        // testing - events on even days
-        if(Int(datestring)! % 2 == 0) {
-            return 1
-        }
+        let datestring = formatDate(date)
         
         return 0
     }
     
-    func calendar(_ calendar: FSCalendar, willDisplay cell: FSCalendarCell, for date: Date, at monthPosition: FSCalendarMonthPosition) {
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        let datestring = formatDate(date)
+        
+        if let currentUser = Auth.auth().currentUser?.email {
+            db.collection(K.firebase.mainDataCollection).document(currentUser).collection(datestring).document("items").getDocument { (document, error) in
+                if let document = document, document.exists {
+                    print("yes")
+                } else {
+                    print("no")
+                }
+            }
+        }
+        
+        // formatted conforming to stored format
+        print(datestring)
+    }
+}
 
-//        cell.numberOfEvents = 1
-        //print(cell.numberOfEvents)
+// MARK: - Reusable methods
+extension StatsViewController {
+    func formatDate(_ date: Date) -> String {
+        let df = DateFormatter()
+        df.dateFormat = "MM-dd-yyyy"
+        let datestring = df.string(from: date)
+        
+        return datestring
     }
 }
