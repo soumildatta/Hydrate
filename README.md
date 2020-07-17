@@ -8,4 +8,4 @@ The purpose of this app is to provide a way of manually keeping track of your da
 ## Key Features
 - Secure authentication
 - Set daily goals for water consumption
-- Opt in for daily reminders to remember to complete your goal
+- Opt in for daily reminders in the form of a notification to remember to complete your goal
