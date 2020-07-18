@@ -77,8 +77,9 @@ class HomeViewController: UIViewController {
         }
         
         // complete daily goal
-        if percent >= 0.1 {
+        if percent >= 1.0 {
             goalComplete = true
+            storeGoalCompleteDate(forDate: currentDateString)
         }
     }
     
@@ -92,13 +93,15 @@ extension HomeViewController {
             db.collection(K.firebase.mainDataCollection).document(currentUser).collection(date).document(K.firebase.secondDocField).setData([
                 K.firebase.currentCountField: current,
                 K.firebase.dateStringField: date
-            ]) { (error) in
-                if let e = error {
-                    print("Error \(e)")
-                } else {
-                    //successful 
-                }
-            }
+            ])
+        }
+    }
+    
+    func storeGoalCompleteDate(forDate date: String) {
+        if let currentUser = Auth.auth().currentUser?.email {
+            db.collection(K.firebase.mainDataCollection).document(currentUser).setData([
+                "dates" : FieldValue.arrayUnion([date])
+            ])
         }
     }
     
