@@ -37,50 +37,42 @@ extension StatsViewController: FSCalendarDelegate, FSCalendarDataSource {
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         let datestring = formatDate(date)
                 
+        // currently only works after switching months
         if(dateArray.contains(datestring)) {
-            print("true")
+//            print("true")
             return 1
         } else {
-            print("false")
-            print(dateArray)
-            print(datestring)
+//            print("false")
+//            print(dateArray)
+//            print(datestring)
             return 0
         }
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let datestring = formatDate(date)
-        
-        retrieveDateData(datestring)
-        
-//        if(dateArray.contains(datestring)) {
-//            print("true")
-//        } else {
-//            print("false")
-//            print(dateArray)
-//            print(datestring)
-//        }
-
-        // formatted conforming to stored format
-//        print(datestring)
-        
-//        print(dateArray)
+        let selectedDate = formatDate(date)
+        retrieveDateData(forDate: selectedDate)
     }
 }
 
+
 extension StatsViewController {
     // MARK: - Firebase methods
-    func retrieveDateData(_ date: String) {
+    func retrieveDateData(forDate date: String) {
         if let currentUser = Auth.auth().currentUser?.email {
             db.collection(K.firebase.mainDataCollection).document(currentUser).collection(date).document(K.firebase.secondDocField).getDocument { (document, error) in
                 if let document = document, document.exists {
                     let data = document.data()
                     
                     if let currentGoal = data?["currentCount"] as! Float? {
-                        self.goalLabel.text = String(currentGoal)
+                        DispatchQueue.main.async {
+                            self.goalLabel.text = String(format: "Consumption: %.0f glasses", currentGoal)
+                        }
                     }
                 } else {
-                    self.goalLabel.text = "0"
+                    DispatchQueue.main.async {
+                        self.goalLabel.text = "Consumption: 0 glasses"
+                    }
                 }
             }
         }
