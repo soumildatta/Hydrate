@@ -80,6 +80,8 @@ class HomeViewController: UIViewController {
         if percent >= 1.0 {
             goalComplete = true
             storeGoalCompleteDate(forDate: currentDateString)
+        } else {
+            // TODO: delete storegoalcompletedate
         }
     }
     
