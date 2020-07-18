@@ -14,6 +14,7 @@ class StatsViewController: UIViewController {
 
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var goalLabel: UILabel!
+    @IBOutlet weak var goalCompleteLabel: UILabel!
     
     let db = Firestore.firestore()
     var dateArray: [String] = []
@@ -64,11 +65,15 @@ extension StatsViewController {
                 if let document = document, document.exists {
                     let data = document.data()
                     
-                    if let currentGoal = data?["currentCount"] as! Float? {
+                    if let currentGoal = data?[K.firebase.currentCountField] as! Float? {
                         DispatchQueue.main.async {
                             self.goalLabel.text = String(format: "Consumption: %.0f glasses", currentGoal)
                         }
                     }
+                    
+//                    if let goalComplete = data?[K.firebase.isGoalComplete] as! Bool? {
+//                        self.goalCompleteLabel.text = goalComplete
+//                    }
                 } else {
                     DispatchQueue.main.async {
                         self.goalLabel.text = "Consumption: 0 glasses"
@@ -78,6 +83,8 @@ extension StatsViewController {
         }
     }
     
+    
+    // fix in the future
     func getDates() {
         if let currentUser = Auth.auth().currentUser?.email {
             db.collection(K.firebase.mainDataCollection).document(currentUser).getDocument { (documentSnapshot, error) in

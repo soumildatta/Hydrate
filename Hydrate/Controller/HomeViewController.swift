@@ -61,7 +61,6 @@ class HomeViewController: UIViewController {
     @IBAction func glassesStepper(_ sender: UIStepper) {
         // change current value based on stepper
         current = Float(sender.value)
-        sendCurrentValue(current, currentDateString)
         
         currentLabel.text = String(format: "%.0f/%.0f", current, goal)
             
@@ -83,6 +82,8 @@ class HomeViewController: UIViewController {
         } else {
             // TODO: delete storegoalcompletedate
         }
+        
+        sendCurrentValue(current, currentDateString, goalComplete)
     }
     
 }
@@ -90,11 +91,12 @@ class HomeViewController: UIViewController {
 
 // MARK: - Firestore
 extension HomeViewController {
-    func sendCurrentValue(_ current: Float, _ date: String) {
+    func sendCurrentValue(_ current: Float, _ date: String, _ goalComplete: Bool) {
         if let currentUser = Auth.auth().currentUser?.email {
             db.collection(K.firebase.mainDataCollection).document(currentUser).collection(date).document(K.firebase.secondDocField).setData([
                 K.firebase.currentCountField: current,
-                K.firebase.dateStringField: date
+                K.firebase.dateStringField: date,
+                K.firebase.isGoalComplete: goalComplete
             ])
         }
     }

@@ -43,26 +43,40 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Glasses Consumed: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXv-DX-EIN">
-                                <rect key="frame" x="83" y="404" width="209" height="26.333333333333314"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="59" translatesAutoresizingMaskIntoConstraints="NO" id="5Al-0T-YmG">
+                                <rect key="frame" x="0.0" y="359" width="375" height="370"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Glasses Consumed: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXv-DX-EIN">
+                                        <rect key="frame" x="83" y="0.0" width="209" height="155.66666666666666"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal Incomplete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7q-cX-Tra">
+                                        <rect key="frame" x="106.66666666666667" y="214.66666666666663" width="161.66666666666663" height="155.33333333333337"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="uWK-t3-fBa" firstAttribute="top" secondItem="eUL-SH-ujz" secondAttribute="top" constant="10" id="591-ym-psm"/>
-                            <constraint firstItem="LXv-DX-EIN" firstAttribute="centerX" secondItem="mUe-ec-ga3" secondAttribute="centerX" id="9bC-5o-17k"/>
                             <constraint firstItem="eUL-SH-ujz" firstAttribute="trailing" secondItem="uWK-t3-fBa" secondAttribute="trailing" constant="5" id="FhE-4f-gte"/>
                             <constraint firstItem="uWK-t3-fBa" firstAttribute="leading" secondItem="eUL-SH-ujz" secondAttribute="leading" constant="5" id="TiD-Ni-BoP"/>
-                            <constraint firstItem="LXv-DX-EIN" firstAttribute="top" secondItem="uWK-t3-fBa" secondAttribute="bottom" constant="50" id="fmM-ld-mPC"/>
+                            <constraint firstItem="eUL-SH-ujz" firstAttribute="trailing" secondItem="5Al-0T-YmG" secondAttribute="trailing" id="Zfw-6z-EnE"/>
+                            <constraint firstItem="5Al-0T-YmG" firstAttribute="leading" secondItem="eUL-SH-ujz" secondAttribute="leading" id="aP5-9d-qlq"/>
+                            <constraint firstItem="5Al-0T-YmG" firstAttribute="top" secondItem="uWK-t3-fBa" secondAttribute="bottom" constant="5" id="avH-g3-cX0"/>
+                            <constraint firstItem="eUL-SH-ujz" firstAttribute="bottom" secondItem="5Al-0T-YmG" secondAttribute="bottom" id="zZV-EU-o0e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eUL-SH-ujz"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Stats" image="chart.bar.fill" catalog="system" id="sy6-HE-LnY"/>
                     <connections>
                         <outlet property="calendar" destination="uWK-t3-fBa" id="VKl-Gf-SEO"/>
+                        <outlet property="goalCompleteLabel" destination="H7q-cX-Tra" id="JDn-NN-Xc5"/>
                         <outlet property="goalLabel" destination="LXv-DX-EIN" id="DPX-cl-k9p"/>
                     </connections>
                 </viewController>

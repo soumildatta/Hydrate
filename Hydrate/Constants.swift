@@ -18,5 +18,6 @@ struct K {
         static let currentCountField = "currentCount"
         static let dateStringField = "date"
         static let secondDocField = "items"
+        static let isGoalComplete = "goalCompleted"
     }
 }
