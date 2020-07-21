@@ -80,6 +80,7 @@ class HomeViewController: UIViewController {
             goalComplete = true
             storeGoalCompleteDate(forDate: currentDateString)
         } else {
+            goalComplete = false
             // TODO: delete storegoalcompletedate
         }
         

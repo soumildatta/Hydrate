@@ -71,12 +71,24 @@ extension StatsViewController {
                         }
                     }
                     
-//                    if let goalComplete = data?[K.firebase.isGoalComplete] as! Bool? {
-//                        self.goalCompleteLabel.text = goalComplete
-//                    }
+                    if let goalComplete = data?[K.firebase.isGoalComplete] {
+                        if goalComplete as! Bool {
+                            DispatchQueue.main.async {
+                                self.goalCompleteLabel.text = "Goal Complete!"
+                                self.goalCompleteLabel.textColor = UIColor.init(red: 0.0078, green: 0.6078, blue: 0, alpha: 1)
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                self.goalCompleteLabel.text = "Goal Incomplete"
+                                self.goalCompleteLabel.textColor = UIColor.red
+                            }
+                        }
+                    }
                 } else {
                     DispatchQueue.main.async {
                         self.goalLabel.text = "Consumption: 0 glasses"
+                        self.goalCompleteLabel.text = "Goal Incomplete"
+                        self.goalCompleteLabel.textColor = UIColor.red
                     }
                 }
             }
