@@ -10,7 +10,7 @@ import UIKit
 import FSCalendar
 import Firebase
 
-class StatsViewController: UIViewController {
+class CalendarViewController: UIViewController {
 
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var goalLabel: UILabel!
@@ -30,7 +30,7 @@ class StatsViewController: UIViewController {
 }
 
 // MARK: - FSCalendar
-extension StatsViewController: FSCalendarDelegate, FSCalendarDataSource {
+extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
     // https://stackoverflow.com/questions/52218935/fscalendar-event-dots-not-showing
     
@@ -57,7 +57,7 @@ extension StatsViewController: FSCalendarDelegate, FSCalendarDataSource {
 }
 
 
-extension StatsViewController {
+extension CalendarViewController {
     // MARK: - Firebase methods
     func retrieveDateData(forDate date: String) {
         if let currentUser = Auth.auth().currentUser?.email {

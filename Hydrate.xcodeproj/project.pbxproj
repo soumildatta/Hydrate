@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A26043EA247F7A7100AE63B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A26043E9247F7A7100AE63B0 /* GoogleService-Info.plist */; };
-		A2786EFC248EEA4B00D2C716 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2786EFB248EEA4B00D2C716 /* StatsViewController.swift */; };
+		A2786EFC248EEA4B00D2C716 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2786EFB248EEA4B00D2C716 /* CalendarViewController.swift */; };
 		A281EC80247F26BC0047C5B0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281EC7F247F26BC0047C5B0 /* LoginViewController.swift */; };
 		A281EC82247F26DA0047C5B0 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281EC81247F26DA0047C5B0 /* SignupViewController.swift */; };
 		A281EC84247F273A0047C5B0 /* ForgotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281EC83247F273A0047C5B0 /* ForgotViewController.swift */; };
@@ -30,7 +30,7 @@
 		547C04B51E1F83563B55390E /* Pods-Hydrate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hydrate.debug.xcconfig"; path = "Target Support Files/Pods-Hydrate/Pods-Hydrate.debug.xcconfig"; sourceTree = "<group>"; };
 		66106E0E387578E178D73CBF /* Pods_Hydrate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hydrate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A26043E9247F7A7100AE63B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		A2786EFB248EEA4B00D2C716 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
+		A2786EFB248EEA4B00D2C716 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A281EC7F247F26BC0047C5B0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A281EC81247F26DA0047C5B0 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		A281EC83247F273A0047C5B0 /* ForgotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotViewController.swift; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 				A281EC7F247F26BC0047C5B0 /* LoginViewController.swift */,
 				A281EC81247F26DA0047C5B0 /* SignupViewController.swift */,
 				A281EC83247F273A0047C5B0 /* ForgotViewController.swift */,
-				A2786EFB248EEA4B00D2C716 /* StatsViewController.swift */,
+				A2786EFB248EEA4B00D2C716 /* CalendarViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -267,7 +267,7 @@
 				A281EC84247F273A0047C5B0 /* ForgotViewController.swift in Sources */,
 				A2DE9B10247630C700D73EF6 /* SceneDelegate.swift in Sources */,
 				A2E68FA924764B7800611C9F /* HomeViewController.swift in Sources */,
-				A2786EFC248EEA4B00D2C716 /* StatsViewController.swift in Sources */,
+				A2786EFC248EEA4B00D2C716 /* CalendarViewController.swift in Sources */,
 				A290093C2482359800D0D5FE /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
