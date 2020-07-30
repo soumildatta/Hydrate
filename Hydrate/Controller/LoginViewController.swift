@@ -45,7 +45,22 @@ class LoginViewController: UIViewController {
         if let email = EmailTextField.text, let password = PasswordTextField.text{
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let e = error {
-                    self.WarningLabel.text = e.localizedDescription
+                    if e.localizedDescription == "The password is invalid or the user does not have a password." {
+                        DispatchQueue.main.async {
+                            self.WarningLabel.text = "Incorrect password"
+                            self.WarningLabel.textColor = UIColor.red
+                        }
+                    } else if e.localizedDescription == "There is no user record corresponding to this identifier. The user may have been deleted."{
+                        DispatchQueue.main.async {
+                            self.WarningLabel.text = "User does not exist"
+                            self.WarningLabel.textColor = UIColor.yellow
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.WarningLabel.text = e.localizedDescription
+                            self.WarningLabel.textColor = UIColor.yellow
+                        }
+                    }
                 } else {
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "LoginSegue", sender: self)
