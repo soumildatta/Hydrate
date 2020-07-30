@@ -7,6 +7,7 @@ target 'Hydrate' do
 
   # Pods for Hydrate
   pod 'FSCalendar'
+  pod 'CLTypingLabel'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
 

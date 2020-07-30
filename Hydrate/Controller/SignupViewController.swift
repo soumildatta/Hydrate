@@ -47,8 +47,14 @@ class SignupViewController: UIViewController {
             if let email = EmailTextField.text, let password = PasswordTextField.text {
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                     if let e = error {
-                        DispatchQueue.main.async {
-                            self.WarningLabel.text = e.localizedDescription
+                        if e.localizedDescription == "The email address is already in use by another account." {
+                            DispatchQueue.main.async {
+                                self.WarningLabel.text = "This email is not available"
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                self.WarningLabel.text = e.localizedDescription
+                            }
                         }
                     } else {
                         // print("Signed up")

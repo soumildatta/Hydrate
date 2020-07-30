@@ -19,11 +19,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hydrate." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NAw-hF-pWB">
-                                <rect key="frame" x="68" y="398.66666666666669" width="278" height="99"/>
+                                <rect key="frame" x="61.333333333333343" y="398.66666666666669" width="291.66666666666663" height="99"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="99" id="Pvy-gq-zC9"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="60"/>
+                                <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="63"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -46,6 +46,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchBackground" width="1125" height="2436"/>
+        <image name="LaunchBackground" width="281" height="609"/>
     </resources>
 </document>

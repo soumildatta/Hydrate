@@ -8,15 +8,20 @@
 
 import UIKit
 import Firebase
+import CLTypingLabel
 
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var WarningLabel: UILabel!
     @IBOutlet weak var EmailTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
+    @IBOutlet weak var HydrateTitle: CLTypingLabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        HydrateTitle.text = "Hydrate."
+        
         EmailTextField.delegate = self
         PasswordTextField.delegate = self
         
