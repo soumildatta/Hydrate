@@ -95,13 +95,12 @@ extension CalendarViewController {
                         }
                     }
                     
-                    if let dailyGoal = data?[K.firebase.dailyGoalField] {
-                        let goal = dailyGoal as! Float
+                    if let goal = data?[K.firebase.dailyGoalField] as! Float? {
                         if let currentGoal = data? [K.firebase.currentCountField] as! Float? {
                             let percent = (currentGoal / goal)
                             DispatchQueue.main.async {
                                 self.goalPercentProgressBar.setProgress(percent, animated: true)
-                                self.goalPercent.text = String(format: "%.0f%", percent * 100) + "%"
+                                self.goalPercent.text = String(format: "Goal %.0f% Complete", percent * 100) + "%"
                             }
                         }
                     }
@@ -113,7 +112,7 @@ extension CalendarViewController {
                         self.goalCompleteLabel.textColor = UIColor.red
                         
                         self.goalPercentProgressBar.setProgress(0.0, animated: true)
-                        self.goalPercent.text = "0%"
+                        self.goalPercent.text = "Goal 0% Complete"
                     }
                 }
             }

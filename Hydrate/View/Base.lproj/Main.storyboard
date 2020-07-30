@@ -47,16 +47,16 @@
                                 <rect key="frame" x="0.0" y="393" width="375" height="336"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="u8p-Lp-Ypn">
-                                        <rect key="frame" x="92.666666666666686" y="0.0" width="190" height="72.666666666666671"/>
+                                        <rect key="frame" x="69.333333333333329" y="0.0" width="236.33333333333337" height="72.666666666666671"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zk-zK-V7C">
-                                                <rect key="frame" x="72.333333333333329" y="0.0" width="45.333333333333329" height="28.666666666666668"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal 0% Complete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zk-zK-V7C">
+                                                <rect key="frame" x="0.0" y="0.0" width="236.33333333333334" height="28.666666666666668"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="nuk-XE-NJG">
-                                                <rect key="frame" x="0.0" y="47.666666666666686" width="190" height="25"/>
+                                                <rect key="frame" x="23.333333333333343" y="47.666666666666686" width="190" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="190" id="LjX-90-jpm"/>
                                                     <constraint firstAttribute="height" constant="25" id="qnx-hB-qeY"/>
