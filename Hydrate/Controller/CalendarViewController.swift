@@ -99,8 +99,10 @@ extension CalendarViewController {
                         let goal = dailyGoal as! Float
                         if let currentGoal = data? [K.firebase.currentCountField] as! Float? {
                             let percent = (currentGoal / goal)
-                            self.goalPercentProgressBar.setProgress(percent, animated: true)
-                            self.goalPercent.text = String(format: "%.0f%", percent * 100) + "%"
+                            DispatchQueue.main.async {
+                                self.goalPercentProgressBar.setProgress(percent, animated: true)
+                                self.goalPercent.text = String(format: "%.0f%", percent * 100) + "%"
+                            }
                         }
                     }
                     

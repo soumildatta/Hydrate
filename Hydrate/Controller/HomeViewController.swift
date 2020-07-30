@@ -31,7 +31,7 @@ class HomeViewController: UIViewController {
     var goalComplete: Bool = false
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(false)
+        super.viewDidAppear(animated)
         
         // reload view every time it is clicked on
         // iniatialize progressbar and stepper values with new (possibly changed) currentGoal value
