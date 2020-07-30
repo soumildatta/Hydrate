@@ -16,6 +16,9 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var goalCompleteLabel: UILabel!
     
+    @IBOutlet weak var goalPercent: UILabel!
+    @IBOutlet weak var goalPercentProgressBar: UIProgressView!
+    
     let db = Firestore.firestore()
     var dateArray: [String] = []
     
@@ -24,6 +27,13 @@ class CalendarViewController: UIViewController {
         // Do any additional setup after loading the view.
         calendar.delegate = self
         calendar.dataSource = self
+        
+        // Progress bar styling
+//        goalPercentProgressBar.transform = goalPercentProgressBar.transform.scaledBy(x: 8, y: 2)
+        goalPercentProgressBar.layer.cornerRadius = 8
+        goalPercentProgressBar.clipsToBounds = true
+        goalPercentProgressBar.layer.sublayers![1].cornerRadius = 8
+        goalPercentProgressBar.subviews[1].clipsToBounds = true
         
         getDates()
     }
@@ -84,11 +94,24 @@ extension CalendarViewController {
                             }
                         }
                     }
+                    
+                    if let dailyGoal = data?[K.firebase.dailyGoalField] {
+                        let goal = dailyGoal as! Float
+                        if let currentGoal = data? [K.firebase.currentCountField] as! Float? {
+                            let percent = (currentGoal / goal)
+                            self.goalPercentProgressBar.setProgress(percent, animated: true)
+                            self.goalPercent.text = String(format: "%.0f%", percent * 100) + "%"
+                        }
+                    }
+                    
                 } else {
                     DispatchQueue.main.async {
                         self.goalLabel.text = "Consumption: 0 glasses"
                         self.goalCompleteLabel.text = "Goal Incomplete"
                         self.goalCompleteLabel.textColor = UIColor.red
+                        
+                        self.goalPercentProgressBar.setProgress(0.0, animated: true)
+                        self.goalPercent.text = "0%"
                     }
                 }
             }

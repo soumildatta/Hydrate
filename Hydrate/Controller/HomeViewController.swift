@@ -84,7 +84,7 @@ class HomeViewController: UIViewController {
             // TODO: delete storegoalcompletedate
         }
         
-        sendCurrentValue(current, currentDateString, goalComplete)
+        sendCurrentValue(current, currentDateString, goalComplete, goal)
     }
     
 }
@@ -92,12 +92,13 @@ class HomeViewController: UIViewController {
 
 // MARK: - Firestore
 extension HomeViewController {
-    func sendCurrentValue(_ current: Float, _ date: String, _ goalComplete: Bool) {
+    func sendCurrentValue(_ current: Float, _ date: String, _ goalComplete: Bool, _ goal: Float) {
         if let currentUser = Auth.auth().currentUser?.email {
             db.collection(K.firebase.mainDataCollection).document(currentUser).collection(date).document(K.firebase.secondDocField).setData([
                 K.firebase.currentCountField: current,
                 K.firebase.dateStringField: date,
-                K.firebase.isGoalComplete: goalComplete
+                K.firebase.isGoalComplete: goalComplete,
+                K.firebase.dailyGoalField: goal
             ])
         }
     }

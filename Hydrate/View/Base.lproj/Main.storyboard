@@ -44,16 +44,34 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="59" translatesAutoresizingMaskIntoConstraints="NO" id="5Al-0T-YmG">
-                                <rect key="frame" x="0.0" y="359" width="375" height="370"/>
+                                <rect key="frame" x="0.0" y="393" width="375" height="336"/>
                                 <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="u8p-Lp-Ypn">
+                                        <rect key="frame" x="92.666666666666686" y="0.0" width="190" height="72.666666666666671"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zk-zK-V7C">
+                                                <rect key="frame" x="72.333333333333329" y="0.0" width="45.333333333333329" height="28.666666666666668"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="nuk-XE-NJG">
+                                                <rect key="frame" x="0.0" y="47.666666666666686" width="190" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="190" id="LjX-90-jpm"/>
+                                                    <constraint firstAttribute="height" constant="25" id="qnx-hB-qeY"/>
+                                                </constraints>
+                                            </progressView>
+                                        </subviews>
+                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Glasses Consumed: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXv-DX-EIN">
-                                        <rect key="frame" x="83" y="0.0" width="209" height="155.66666666666666"/>
+                                        <rect key="frame" x="83" y="131.66666666666663" width="209" height="72.666666666666686"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal Incomplete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7q-cX-Tra">
-                                        <rect key="frame" x="106.66666666666667" y="214.66666666666663" width="161.66666666666663" height="155.33333333333337"/>
+                                        <rect key="frame" x="106.66666666666667" y="263.33333333333337" width="161.66666666666663" height="72.666666666666686"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -68,7 +86,7 @@
                             <constraint firstItem="uWK-t3-fBa" firstAttribute="leading" secondItem="eUL-SH-ujz" secondAttribute="leading" constant="5" id="TiD-Ni-BoP"/>
                             <constraint firstItem="eUL-SH-ujz" firstAttribute="trailing" secondItem="5Al-0T-YmG" secondAttribute="trailing" id="Zfw-6z-EnE"/>
                             <constraint firstItem="5Al-0T-YmG" firstAttribute="leading" secondItem="eUL-SH-ujz" secondAttribute="leading" id="aP5-9d-qlq"/>
-                            <constraint firstItem="5Al-0T-YmG" firstAttribute="top" secondItem="uWK-t3-fBa" secondAttribute="bottom" constant="5" id="avH-g3-cX0"/>
+                            <constraint firstItem="5Al-0T-YmG" firstAttribute="top" secondItem="uWK-t3-fBa" secondAttribute="bottom" constant="39" id="avH-g3-cX0"/>
                             <constraint firstItem="eUL-SH-ujz" firstAttribute="bottom" secondItem="5Al-0T-YmG" secondAttribute="bottom" id="zZV-EU-o0e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eUL-SH-ujz"/>
@@ -78,11 +96,13 @@
                         <outlet property="calendar" destination="uWK-t3-fBa" id="VKl-Gf-SEO"/>
                         <outlet property="goalCompleteLabel" destination="H7q-cX-Tra" id="JDn-NN-Xc5"/>
                         <outlet property="goalLabel" destination="LXv-DX-EIN" id="DPX-cl-k9p"/>
+                        <outlet property="goalPercent" destination="5zk-zK-V7C" id="cDQ-jf-u8N"/>
+                        <outlet property="goalPercentProgressBar" destination="nuk-XE-NJG" id="OHN-fN-Myz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MAj-17-Mdx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-533" y="-133"/>
+            <point key="canvasLocation" x="-533.60000000000002" y="-133.00492610837438"/>
         </scene>
         <!--Settings-->
         <scene sceneID="DKX-FO-NTI">
