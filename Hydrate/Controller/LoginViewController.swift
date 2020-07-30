@@ -40,6 +40,12 @@ class LoginViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        WarningLabel.text = ""
+    }
+    
     @IBAction func LoginPressed(_ sender: UIButton) {
         // TODO function to check email syntax
         if let email = EmailTextField.text, let password = PasswordTextField.text{

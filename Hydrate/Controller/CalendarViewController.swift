@@ -100,7 +100,7 @@ extension CalendarViewController {
                             let percent = (currentGoal / goal)
                             DispatchQueue.main.async {
                                 self.goalPercentProgressBar.setProgress(percent, animated: true)
-                                self.goalPercent.text = String(format: "Goal %.0f% Complete", percent * 100) + "%"
+                                self.goalPercent.text = String(format: "Goal %.0f", percent * 100) + "% Complete"
                             }
                         }
                     }
