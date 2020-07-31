@@ -16,4 +16,4 @@ The purpose of this app is to provide a way of manually keeping track of your da
 - View your consumption and goal completion history using a calendar to select the dates 
 
 ## Technologies used
-The app uses Firebase and Firestore for authentication and data storage. CLTypingLabel is used in the login screen, to give the text a typing animation when the view loads up. FSCalendar is used for the calendar view on the calendar tab, which lets the user select a certain date and view the stats for the selected date. 
+The app uses Firebase and Firestore for authentication and data storage. [CLTypingLabel](https://cocoapods.org/pods/CLTypingLabel) is used in the login screen, to give the text a typing animation when the view loads up. [FSCalendar](https://cocoapods.org/pods/FSCalendar) is used for the calendar view on the calendar tab, which lets the user select a certain date and view the stats for the selected date.
