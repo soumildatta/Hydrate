@@ -1,3 +1,7 @@
+[![xcode-version](https://img.shields.io/badge/xcode-11-brightgreen)](https://developer.apple.com/xcode/)
+[![swift-version](https://img.shields.io/badge/swift-5-orange)](https://github.com/apple/swift)
+
+
 # Hydrate App (iOS)
 
 Hydrate is a simple app that helps you track your water consumption per day. The water consumption is measured by cups, and the consumption goal everyday is customizable. The goal completion and consumption history can also be seen in a calendar view.
