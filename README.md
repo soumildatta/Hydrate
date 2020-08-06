@@ -1,5 +1,6 @@
 [![xcode-version](https://img.shields.io/badge/xcode-11-brightgreen)](https://developer.apple.com/xcode/)
 [![swift-version](https://img.shields.io/badge/swift-5-orange)](https://github.com/apple/swift)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) <br>
 
 
 # Hydrate App (iOS)
